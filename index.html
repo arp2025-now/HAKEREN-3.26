@@ -819,6 +819,85 @@
   </style>
 </head>
 <body>
+
+<!-- ═══════════════ PASSWORD GATE ═══════════════ -->
+<div id="pw-gate" style="
+  position:fixed; inset:0; z-index:9999;
+  background: linear-gradient(135deg,#1a2e5a 0%,#1e3d78 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Heebo',sans-serif; direction:rtl;
+">
+  <div style="
+    background:#fff; border-radius:20px; padding:40px 36px;
+    max-width:380px; width:90%; text-align:center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  ">
+    <div style="font-size:36px; margin-bottom:12px;">🔒</div>
+    <div style="font-size:22px; font-weight:800; color:#1a2e5a; margin-bottom:6px;">מסמך מוגן</div>
+    <div style="font-size:14px; color:#666; margin-bottom:24px;">הזינו את הסיסמה לצפייה בהצעה</div>
+    <input id="pw-input" type="password" placeholder="סיסמה" style="
+      width:100%; padding:12px 16px; border:2px solid #d0daf0;
+      border-radius:10px; font-size:16px; font-family:'Heebo',sans-serif;
+      text-align:center; box-sizing:border-box; margin-bottom:14px;
+      outline:none; transition:border-color 0.2s;
+    " onkeydown="if(event.key==='Enter') checkPassword()">
+    <div id="pw-error" style="color:#c0392b; font-size:13px; margin-bottom:10px; min-height:18px;"></div>
+    <button onclick="checkPassword()" style="
+      background:#1e3d78; color:#fff; border:none;
+      padding:13px 32px; border-radius:10px; font-size:16px;
+      font-family:'Heebo',sans-serif; font-weight:700;
+      cursor:pointer; width:100%;
+    ">כניסה</button>
+    <div style="margin-top:16px; font-size:12px; color:#aaa;">AP Automations — הצעת מחיר</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  הגדרות — שנו כאן לפי הצורך
+// ════════════════════════════════════════════════
+var DOC_PASSWORD = 'hakeren2026';        // ← שנו סיסמה כאן
+var TRACKING_WEBHOOK = '';               // ← הדביקו כאן URL של Make.com/n8n webhook (אפשר להשאיר ריק)
+var _visitStart = null;
+
+function checkPassword() {
+  var val = document.getElementById('pw-input').value.trim();
+  if (val === DOC_PASSWORD) {
+    document.getElementById('pw-gate').style.display = 'none';
+    _visitStart = Date.now();
+    trackEvent('open');
+  } else {
+    document.getElementById('pw-error').textContent = 'סיסמה שגויה — נסו שנית';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function trackEvent(type) {
+  if (!TRACKING_WEBHOOK) return;
+  var payload = {
+    event: type,
+    document: 'HAKEREN-3.26',
+    timestamp: new Date().toISOString(),
+    duration_seconds: _visitStart ? Math.round((Date.now() - _visitStart) / 1000) : 0,
+    url: window.location.href
+  };
+  try {
+    navigator.sendBeacon(TRACKING_WEBHOOK, JSON.stringify(payload));
+  } catch(e) {
+    fetch(TRACKING_WEBHOOK, { method: 'POST', body: JSON.stringify(payload), keepalive: true }).catch(function(){});
+  }
+}
+
+window.addEventListener('beforeunload', function() {
+  if (_visitStart) trackEvent('close');
+});
+
+// Focus password input on load
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('pw-input').focus();
+});
+</script>
 <div class="page">
 
   <!-- ════ HEADER ════ -->
@@ -1363,7 +1442,7 @@
             <input type="radio" name="support-type" value="warranty" checked>
             <div class="support-option-body">
               <div class="support-option-title">אחריות ותקינות</div>
-              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפתיחת קריאה. ביטול בהודעה מראש של 30 יום.</div>
+              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפתיחת קריאה.</div>
               <div class="support-option-price">1,000 ₪ / חודש</div>
             </div>
           </label>
@@ -1372,7 +1451,7 @@
             <input type="radio" name="support-type" value="hours">
             <div class="support-option-body">
               <div class="support-option-title">סל שעות חודשי — כולל הכל ✦</div>
-              <div class="support-option-desc">כולל אחריות ותקינות <strong>בלי תוספת עלות</strong>, ועל גבי זה — שעות לפיתוח אוטומציות חדשות וייעול תהליכים. המערכת ממשיכה לגדול יחד איתכם. מענה ראשוני תוך 5 שעות. פירוט ביצוע בסוף כל חודש. שעות שלא נוצלו עוברות לחודש הבא. ביטול בהודעה מראש של 30 יום.</div>
+              <div class="support-option-desc">כולל אחריות ותקינות <strong>בלי תוספת עלות</strong>, ועל גבי זה — <strong>סל שעות לפיתוח אוטומציות חדשות וייעול תהליכים.</strong> המערכת לא רק נשמרת — היא ממשיכה לגדול ולחסוך לכם זמן. מענה ראשוני תוך 5 שעות. פירוט ביצוע בסוף כל חודש. שעות שלא נוצלו עוברות לחודש הבא. ביטול בהודעה מראש של 30 יום.</div>
               <div class="hours-selector">
                 <select id="hours-select" disabled>
                   <option value="10" data-rate="500">10 שעות — 500 ₪/שעה = 5,000 ₪/חודש</option>
@@ -1390,7 +1469,7 @@
           <span id="support-total" class="calc-total-num">1,000 ₪/חודש</span>
         </div>
         <div class="calc-total-row" style="margin-top:8px; font-size:15px; border-top: 2px solid #1e3d78; padding-top:12px;">
-          <span>סה"כ כולל (חד פעמי + חודש ראשון):</span>
+          <span>סה"כ כולל (חד פעמי + עלות תמיכה חודשית):</span>
           <span id="grand-total" class="calc-total-num" style="color:#1e3d78;">13,000 ₪</span>
         </div>
       </div>
@@ -1492,6 +1571,7 @@
               <li>ביטול אחרי תחילת עבודה: תשלום מינימום 50%</li>
               <li>ביטול אחרי אפיון ובניית מסד נתונים: תשלום מלא</li>
               <li>עיכוב 14+ ימי עסקים מהלקוח: הקפאת הפרויקט</li>
+              <li>ביטול סל שעות חודשי: הודעה מראש של <strong>30 יום</strong></li>
             </ul>
           </div>
         </div>
@@ -1520,7 +1600,7 @@
       <div class="signature-section">
         <div class="sig-box">
           <div class="sig-label">חבילה נבחרת: <span id="selected-package">_______________________</span></div>
-          <div class="sig-label" style="font-size:14px; color:#1e3d78; font-weight:600;">סה"כ כולל (חד פעמי + חודש ראשון): <span id="sig-grand-total">—</span></div>
+          <div class="sig-label" style="font-size:14px; color:#1e3d78; font-weight:600;">סה"כ כולל (חד פעמי + עלות תמיכה חודשית): <span id="sig-grand-total">—</span></div>
           <div class="sig-label">חתימת הלקוח - יוסי קרוהן / רון אובוז</div>
           <canvas id="sig-canvas"></canvas>
           <div class="sig-canvas-controls">
