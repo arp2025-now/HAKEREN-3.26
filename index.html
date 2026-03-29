@@ -810,6 +810,29 @@
       padding: 10px 16px;
       margin-bottom: 6px;
     }
+    /* Signature pricing summary */
+    .sig-pricing-summary {
+      background: #f8faff;
+      border: 1.5px solid #d0daf0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .sig-pricing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      font-size: 13px;
+      color: #5a6a80;
+      border-bottom: 1px solid #e8eef8;
+    }
+    .sig-pricing-row:last-child { border-bottom: none; }
+    .sig-pricing-row:first-child { font-size: 14px; color: #1a2e5a; font-weight: 700; }
+    .sig-pricing-label em { font-style: normal; font-size: 11px; color: #9aaabb; }
+    .sig-pricing-val { font-weight: 700; color: #1e3d78; white-space: nowrap; margin-right: 8px; }
+    .sig-pricing-onetime .sig-pricing-val { font-size: 15px; }
+    .sig-pricing-monthly .sig-pricing-val { font-size: 14px; color: #5a6a80; }
     @media (max-width: 768px) {
       .basic-pkg-card { padding: 16px; }
       .basic-pkg-header { flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -1470,9 +1493,9 @@ window.addEventListener('DOMContentLoaded', function() {
           <span>תמיכה חודשית:</span>
           <span id="support-total" class="calc-total-num">1,000 ₪/חודש</span>
         </div>
-        <div class="calc-total-row" style="margin-top:8px; font-size:15px; border-top: 2px solid #1e3d78; padding-top:12px;">
-          <span>סה"כ כולל (חד פעמי + עלות תמיכה חודשית):</span>
-          <span id="grand-total" class="calc-total-num" style="color:#1e3d78;">13,000 ₪</span>
+        <div class="calc-total-row" style="margin-top:8px; font-size:14px; border-top: 2px solid #1e3d78; padding-top:12px; color:#666;">
+          <span>הקמה חד פעמית + תמיכה חודשית:</span>
+          <span id="grand-total" style="font-weight:700; color:#1e3d78; font-size:15px;">12,000 ₪ + 1,000 ₪/חודש</span>
         </div>
       </div>
 
@@ -1601,8 +1624,20 @@ window.addEventListener('DOMContentLoaded', function() {
       <!-- Signature -->
       <div class="signature-section">
         <div class="sig-box">
-          <div class="sig-label">חבילה נבחרת: <span id="selected-package">_______________________</span></div>
-          <div class="sig-label" style="font-size:14px; color:#1e3d78; font-weight:600;">סה"כ כולל (חד פעמי + עלות תמיכה חודשית): <span id="sig-grand-total">—</span></div>
+          <div class="sig-pricing-summary">
+            <div class="sig-pricing-row">
+              <span class="sig-pricing-label">חבילה נבחרת</span>
+              <span class="sig-pricing-val" id="selected-package">_______________</span>
+            </div>
+            <div class="sig-pricing-row sig-pricing-onetime">
+              <span class="sig-pricing-label">עלות הקמה <em>(חד פעמית)</em></span>
+              <span class="sig-pricing-val" id="sig-onetime-total">—</span>
+            </div>
+            <div class="sig-pricing-row sig-pricing-monthly">
+              <span class="sig-pricing-label">תמיכה חודשית <em>(מהחודש השני)</em></span>
+              <span class="sig-pricing-val" id="sig-monthly-total">—</span>
+            </div>
+          </div>
           <div class="sig-label">חתימת הלקוח - יוסי קרוהן / רון אובוז</div>
           <canvas id="sig-canvas"></canvas>
           <div class="sig-canvas-controls">
@@ -1737,20 +1772,22 @@ window.addEventListener('DOMContentLoaded', function() {
       monthly = parseInt(opt.value) * parseInt(opt.getAttribute('data-rate'));
     }
     var grand = oneTime + monthly;
-    var grandStr = grand.toLocaleString('he-IL') + ' ₪';
-    document.getElementById('grand-total').textContent = grandStr;
-    var sigGrand = document.getElementById('sig-grand-total');
-    if (sigGrand) sigGrand.textContent = grandStr;
-    // update selected-package summary automatically
+    // calculator totals
+    document.getElementById('grand-total').textContent = oneTime.toLocaleString('he-IL') + ' \u20aa + ' + monthly.toLocaleString('he-IL') + ' \u20aa/\u05d7\u05d5\u05d3\u05e9';
+    // signature: package name
     var items = ['\u05d7\u05d1\u05d9\u05dc\u05d4 \u05d1\u05e1\u05d9\u05e1\u05d9\u05ea'];
     document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
       items.push(cb.getAttribute('data-name'));
     });
-    var type = document.querySelector('input[name="support-type"]:checked').value;
-    var supportLabel = type === 'warranty' ? '\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea 1,000\u20aa/\u05d7\u05d5\u05d3\u05e9' : '\u05e1\u05dc \u05e9\u05e2\u05d5\u05ea';
-    items.push(supportLabel);
-    var field = document.getElementById('selected-package');
-    if (field) { field.textContent = items.join(' + ') + ' \u2014 ' + grandStr; field.style.fontWeight = '700'; field.style.color = '#1e3d78'; }
+    var pkgField = document.getElementById('selected-package');
+    if (pkgField) pkgField.textContent = items.join(' + ');
+    // signature: one-time
+    var onetimeEl = document.getElementById('sig-onetime-total');
+    if (onetimeEl) onetimeEl.textContent = oneTime.toLocaleString('he-IL') + ' \u20aa';
+    // signature: monthly
+    var supportLabel = type === 'warranty' ? '\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea \u05d5\u05ea\u05e7\u05d9\u05e0\u05d5\u05ea' : '\u05e1\u05dc \u05e9\u05e2\u05d5\u05ea';
+    var monthlyEl = document.getElementById('sig-monthly-total');
+    if (monthlyEl) monthlyEl.textContent = monthly.toLocaleString('he-IL') + ' \u20aa/\u05d7\u05d5\u05d3\u05e9 (' + supportLabel + ')';
   }
 
   function updateCalcTotal() {
