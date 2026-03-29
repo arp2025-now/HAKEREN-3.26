@@ -857,7 +857,8 @@
 //  הגדרות — שנו כאן לפי הצורך
 // ════════════════════════════════════════════════
 var DOC_PASSWORD = 'hakeren2026';        // ← שנו סיסמה כאן
-var TRACKING_WEBHOOK = '';               // ← הדביקו כאן URL של Make.com/n8n webhook (אפשר להשאיר ריק)
+var TRACKING_WEBHOOK = 'https://hook.eu2.make.com/4mme7jnrjchbkoyirq88bivschwsua2e';
+var COMPANY = 'הקרן הישראלית לביטחון סוציאלי';  // ← שנו לפי שם הלקוח
 var _visitStart = null;
 
 function checkPassword() {
@@ -878,6 +879,7 @@ function trackEvent(type) {
   var payload = {
     event: type,
     document: 'HAKEREN-3.26',
+    company: COMPANY,
     timestamp: new Date().toISOString(),
     duration_seconds: _visitStart ? Math.round((Date.now() - _visitStart) / 1000) : 0,
     url: window.location.href
@@ -1225,7 +1227,7 @@ window.addEventListener('DOMContentLoaded', function() {
               <tr><td>אין מענה מנציג אחרי X שעות</td><td>תזכורת לנציג / העברה לראש צוות</td></tr>
               <tr><td>קביעת פגישה דרך הבוט</td><td>יצירת אירוע ב-Google Calendar + שליחת אישור ללקוח</td></tr>
               <tr><td>הגשת טופס קיים (זכויות, מקלט, קטנוע)</td><td>יצירה / עדכון ליד ב-CRM</td></tr>
-              <tr><td>ליד הושלם + cross-sell</td><td>שליחת הצעה לשירות נוסף רלוונטי</td></tr>
+              <tr><td>ליד הושלם + AI cross-sell</td><td>ה-AI מזהה לאיזה שירות נוסף הלקוח עשוי להיות זכאי ושולח הצעה מותאמת — ללא מגע אנושי</td></tr>
             </tbody>
           </table>
         </div>
@@ -1404,7 +1406,7 @@ window.addEventListener('DOMContentLoaded', function() {
               <span class="calc-price">12,000 ₪</span>
             </label>
             <label class="calc-item">
-              <input type="checkbox" class="addon-cb" data-price="3000" data-name="AI מכירתי"> AI מכירתי - cross-sell חכם, מיון לידים לפי פוטנציאל
+              <input type="checkbox" class="addon-cb" data-price="3000" data-name="AI מכירתי"> AI מכירתי - כשמשתמש מסיים שירות, ה-AI מזהה איזה שירות נוסף רלוונטי עבורו ושולח הצעה מותאמת אישית
               <span class="calc-price">3,000 ₪</span>
             </label>
             <label class="calc-item">
@@ -1442,7 +1444,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <input type="radio" name="support-type" value="warranty" checked>
             <div class="support-option-body">
               <div class="support-option-title">אחריות ותקינות</div>
-              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפתיחת קריאה.</div>
+              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפנייה.</div>
               <div class="support-option-price">1,000 ₪ / חודש</div>
             </div>
           </label>
@@ -1451,7 +1453,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <input type="radio" name="support-type" value="hours">
             <div class="support-option-body">
               <div class="support-option-title">סל שעות חודשי — כולל הכל ✦</div>
-              <div class="support-option-desc">כולל אחריות ותקינות <strong>בלי תוספת עלות</strong>, ועל גבי זה — <strong>סל שעות לפיתוח אוטומציות חדשות וייעול תהליכים.</strong> המערכת לא רק נשמרת — היא ממשיכה לגדול ולחסוך לכם זמן. מענה ראשוני תוך 5 שעות. פירוט ביצוע בסוף כל חודש. שעות שלא נוצלו עוברות לחודש הבא. ביטול בהודעה מראש של 30 יום.</div>
+              <div class="support-option-desc">כולל אחריות ותקינות <strong>בלי תוספת עלות</strong>, ועל גבי זה — <strong>סל שעות לפיתוח אוטומציות חדשות וייעול תהליכים.</strong> המערכת לא רק נשמרת — היא ממשיכה לגדול ולחסוך לכם זמן. מענה ראשוני תוך 5 שעות מפנייה. פירוט ביצוע בסוף כל חודש. שעות שלא נוצלו עוברות לחודש הבא.</div>
               <div class="hours-selector">
                 <select id="hours-select" disabled>
                   <option value="10" data-rate="500">10 שעות — 500 ₪/שעה = 5,000 ₪/חודש</option>
@@ -1739,6 +1741,16 @@ window.addEventListener('DOMContentLoaded', function() {
     document.getElementById('grand-total').textContent = grandStr;
     var sigGrand = document.getElementById('sig-grand-total');
     if (sigGrand) sigGrand.textContent = grandStr;
+    // update selected-package summary automatically
+    var items = ['\u05d7\u05d1\u05d9\u05dc\u05d4 \u05d1\u05e1\u05d9\u05e1\u05d9\u05ea'];
+    document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
+      items.push(cb.getAttribute('data-name'));
+    });
+    var type = document.querySelector('input[name="support-type"]:checked').value;
+    var supportLabel = type === 'warranty' ? '\u05d0\u05d7\u05e8\u05d9\u05d5\u05ea 1,000\u20aa/\u05d7\u05d5\u05d3\u05e9' : '\u05e1\u05dc \u05e9\u05e2\u05d5\u05ea';
+    items.push(supportLabel);
+    var field = document.getElementById('selected-package');
+    if (field) { field.textContent = items.join(' + ') + ' \u2014 ' + grandStr; field.style.fontWeight = '700'; field.style.color = '#1e3d78'; }
   }
 
   function updateCalcTotal() {
