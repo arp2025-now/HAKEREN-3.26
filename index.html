@@ -897,26 +897,46 @@ function checkPassword() {
   }
 }
 
+function formatTimestamp() {
+  var d = new Date();
+  var pad = function(n) { return n < 10 ? '0' + n : n; };
+  return pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear() +
+    ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+}
+
 function trackEvent(type) {
   if (!TRACKING_WEBHOOK) return;
   var payload = {
     event: type,
     document: 'HAKEREN-3.26',
     company: COMPANY,
-    timestamp: new Date().toISOString(),
+    timestamp: formatTimestamp(),
     duration_seconds: _visitStart ? Math.round((Date.now() - _visitStart) / 1000) : 0,
+    duration_readable: _visitStart ? Math.floor((Date.now()-_visitStart)/60000) + ' דקות ' + Math.floor(((Date.now()-_visitStart)%60000)/1000) + ' שניות' : '0',
     url: window.location.href
   };
+  // sendBeacon must send Blob with application/json so Make.com parses correctly
+  var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+  var sent = false;
   try {
-    navigator.sendBeacon(TRACKING_WEBHOOK, JSON.stringify(payload));
-  } catch(e) {
-    fetch(TRACKING_WEBHOOK, { method: 'POST', body: JSON.stringify(payload), keepalive: true }).catch(function(){});
+    sent = navigator.sendBeacon(TRACKING_WEBHOOK, blob);
+  } catch(e) {}
+  if (!sent) {
+    fetch(TRACKING_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(function(){});
   }
 }
 
-window.addEventListener('beforeunload', function() {
+// Send close event — fires on tab close, navigate away, refresh
+function sendCloseEvent() {
   if (_visitStart) trackEvent('close');
-});
+}
+window.addEventListener('beforeunload', sendCloseEvent);
+window.addEventListener('pagehide', sendCloseEvent); // mobile fallback
 
 // Focus password input on load
 window.addEventListener('DOMContentLoaded', function() {
@@ -1467,7 +1487,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <input type="radio" name="support-type" value="warranty" checked>
             <div class="support-option-body">
               <div class="support-option-title">אחריות ותקינות</div>
-              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפנייה.</div>
+              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>לא כולל פיתוחים חדשים.</strong> החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפנייה.</div>
               <div class="support-option-price">1,000 ₪ / חודש</div>
             </div>
           </label>
