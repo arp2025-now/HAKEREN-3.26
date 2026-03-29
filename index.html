@@ -908,29 +908,23 @@ function formatTimestamp() {
 
 function trackEvent(type) {
   if (!TRACKING_WEBHOOK) return;
-  var payload = {
-    event: type,
-    document: 'HAKEREN-3.26',
-    company: COMPANY,
-    timestamp: formatTimestamp(),
-    duration_seconds: Math.round((Date.now() - (_visitStart || _pageLoadTime)) / 1000),
-    duration_readable: (function() { var ms = Date.now() - (_visitStart || _pageLoadTime); return Math.floor(ms/60000) + ' דקות ' + Math.floor((ms%60000)/1000) + ' שניות'; })(),
-    password_entered: !!_visitStart,
-    url: window.location.href
-  };
-  // sendBeacon must send Blob with application/json so Make.com parses correctly
-  var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-  var sent = false;
-  try {
-    sent = navigator.sendBeacon(TRACKING_WEBHOOK, blob);
-  } catch(e) {}
-  if (!sent) {
-    fetch(TRACKING_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      keepalive: true
-    }).catch(function(){});
+  var ms = Date.now() - (_visitStart || _pageLoadTime);
+  var mins = Math.floor(ms / 60000);
+  var secs = Math.floor((ms % 60000) / 1000);
+  // GET via Image — no CORS restrictions, works from any domain
+  var url = TRACKING_WEBHOOK
+    + '?event='    + encodeURIComponent(type)
+    + '&doc='      + 'HAKEREN-3.26'
+    + '&company='  + encodeURIComponent(COMPANY)
+    + '&ts='       + encodeURIComponent(formatTimestamp())
+    + '&duration=' + mins + 'm' + secs + 's'
+    + '&pwd='      + (!!_visitStart ? 'yes' : 'no');
+  new Image().src = url;
+  // close: also sendBeacon (text/plain, no preflight) as backup
+  if (type === 'close') {
+    try {
+      navigator.sendBeacon(url, '');
+    } catch(e) {}
   }
 }
 
