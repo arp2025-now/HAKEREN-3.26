@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אפיון + הצעת מחיר - הקרן הישראלית לזכויות העובד הזר | AP Automations</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: #f4f6fb;
+    color: #1a2e5a;
+    direction: rtl;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 32px rgba(26,46,90,0.10);
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #1a2e5a 0%, #1e3d78 60%, #2a52a0 100%);
+    color: #fff;
+    padding: 40px 48px 32px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.85; }
+  .brand-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+  .header-meta { text-align: left; font-size: 13px; opacity: 0.8; line-height: 1.8; }
+  .doc-title { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .doc-subtitle { font-size: 15px; font-weight: 400; opacity: 0.85; margin-top: 6px; }
+  .meta-table {
+    margin-top: 24px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 40px;
+  }
+  .meta-row { display: flex; gap: 8px; font-size: 13px; }
+  .meta-label { font-weight: 600; opacity: 0.75; white-space: nowrap; }
+  .meta-value { opacity: 0.95; }
+
+  /* ── Table of Contents ── */
+  .toc {
+    background: #f0f4fc;
+    border-bottom: 2px solid #d0d9ef;
+    padding: 14px 48px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .toc-label { font-size: 13px; font-weight: 600; color: #1a2e5a; opacity: 0.7; }
+  .toc-sep { color: #aab; font-size: 13px; }
+  .toc a {
+    font-size: 13px; font-weight: 600; color: #1e3d78;
+    text-decoration: none; padding: 4px 12px;
+    background: #fff; border: 1px solid #c8d4ec;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .toc a:hover { background: #1e3d78; color: #fff; }
+
+  /* ── SPEC SECTION ── */
+  #spec { background: #fff; }
+  .content { padding: 36px 48px 48px; }
+
+  /* ── Section ── */
+  .section { margin-bottom: 40px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e8edf5;
+  }
+  .section-num {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, #1a2e5a, #1e3d78);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .section-title-text { font-size: 20px; font-weight: 700; color: #1a2e5a; }
+
+  /* ── Sub-sections ── */
+  .sub-section { margin-bottom: 24px; }
+  .sub-title {
+    font-size: 15px; font-weight: 700; color: #1e3d78;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    border-right: 3px solid #1e3d78;
+  }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  th {
+    background: #1a2e5a;
+    color: #fff;
+    padding: 10px 14px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 13px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e8edf5;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:last-child td { border-bottom: none; }
+  td strong { color: #1a2e5a; }
+
+  /* ── Note blocks ── */
+  .note {
+    background: #eef2fa;
+    border-right: 4px solid #1e3d78;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: #1a2e5a;
+    line-height: 1.7;
+  }
+  .note strong { font-weight: 700; }
+  .note.warning {
+    background: #fff8e6;
+    border-right-color: #e8a020;
+    color: #7a4f00;
+  }
+  .note.warning strong { color: #7a4f00; }
+
+  /* ── Lists ── */
+  ul { padding-right: 20px; margin-bottom: 12px; }
+  li { margin-bottom: 5px; line-height: 1.65; }
+  li strong { color: #1a2e5a; }
+
+  /* ── Step flow (spec) ── */
+  .spec-steps { display: flex; flex-direction: column; gap: 0; }
+  .spec-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8edf5;
+  }
+  .spec-step:last-child { border-bottom: none; }
+  .spec-step-num {
+    width: 28px; height: 28px;
+    background: #1e3d78;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .spec-step-body { flex: 1; }
+  .spec-step-title { font-weight: 700; color: #1a2e5a; margin-bottom: 4px; font-size: 15px; }
+  .spec-step-desc { font-size: 13.5px; color: #4a5a7a; line-height: 1.6; }
+
+  /* ── Add-on cards (spec section, no prices) ── */
+  .addon-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .addon-card {
+    border: 1.5px solid #d0d9ef;
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: #f8fafc;
+  }
+  .addon-card-title { font-size: 15px; font-weight: 700; color: #1a2e5a; margin-bottom: 8px; }
+  .addon-list { padding-right: 16px; margin-bottom: 0; }
+  .addon-list li { font-size: 13.5px; color: #4a5a7a; margin-bottom: 4px; }
+
+  /* ── Status badges ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-pending { background: #fff3cd; color: #856404; }
+  .badge-done { background: #d1fae5; color: #065f46; }
+  .badge-check { background: #dbeafe; color: #1e40af; }
+
+  /* ── Risk colors ── */
+  .risk-high { color: #b91c1c; font-weight: 600; }
+  .risk-med { color: #d97706; font-weight: 600; }
+
+  /* ── CTA Section (bottom of spec) ── */
+  .spec-cta {
+    background: linear-gradient(135deg, #1a2e5a, #1e3d78);
+    border-radius: 14px;
+    padding: 32px 36px;
+    text-align: center;
+    color: #fff;
+    margin-top: 40px;
+    margin-bottom: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .spec-cta p { font-size: 16px; line-height: 1.7; margin-bottom: 20px; opacity: 0.9; }
+  .spec-cta strong { color: #7eb8f7; font-weight: 800; }
+  .cta-big-btn {
+    display: inline-block;
+    background: #fff;
+    color: #1a2e5a;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .cta-big-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+
+  /* ── Section Divider ── */
+  .section-divider {
+    background: linear-gradient(135deg, #e8edf5, #d0d9ef);
+    padding: 20px 48px;
+    text-align: center;
+    border-top: 3px solid #1e3d78;
+  }
+  .section-divider-inner {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2e5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .section-divider-inner::before,
+  .section-divider-inner::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #a0aec0;
+  }
+
+  /* ── PRICING SECTION ── */
+  #pricing {
+    background: #fafbff;
+    border-top: 1px solid #e0e8f5;
+  }
+  .pricing-content { padding: 40px 48px 48px; }
+
+  /* ── Proposal Section Title ── */
+  .prop-section { margin-bottom: 40px; }
+  .prop-section-title {
+    font-size: 18px; font-weight: 700; color: #1a2e5a; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .prop-section-title::before {
+    content: ''; display: inline-block; width: 5px; height: 22px;
+    background: #1e3d78; border-radius: 3px; flex-shrink: 0;
+  }
+
+  /* ── Bridge ── */
+  .bridge {
+    font-size: 15.5px; line-height: 1.85; color: #333; margin-bottom: 36px;
+    padding: 24px 28px; background: #f0f5ff;
+    border-right: 4px solid #1e3d78; border-radius: 0 8px 8px 0;
+  }
+  .bridge strong { color: #1a2e5a; }
+
+  /* ── Package Comparison Table (desktop) ── */
+  .pkg-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  .pkg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .pkg-table th {
+    background: #1a2e5a;
+    color: #fff;
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 13px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .pkg-table th.col-feature { text-align: right; }
+  .pkg-table th.col-recommended {
+    background: linear-gradient(135deg, #1e3d78, #2a52a0);
+    position: relative;
+  }
+  .pkg-table th.col-recommended::after {
+    content: '⭐ הכי מומלצת';
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffd700;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+  }
+  .pkg-table .price-row td {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a2e5a;
+    text-align: center;
+    padding: 16px;
+    background: #f0f5ff;
+    border-bottom: 2px solid #d0d9ef;
+  }
+  .pkg-table .price-row td.recommended-col {
+    background: linear-gradient(135deg, #eef4ff, #e0eaff);
+    color: #1e3d78;
+  }
+  .pkg-table .price-row .price-savings {
+    display: block;
+    font-size: 11px;
+    color: #2a9d2a;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .pkg-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e8edf5;
+    text-align: center;
+    color: #333;
+  }
+  .pkg-table td.col-feature {
+    text-align: right;
+    font-weight: 600;
+    color: #1a2e5a;
+    background: #fafbff;
+  }
+  .pkg-table td.recommended-col { background: #f5f8ff; }
+  .pkg-table .check { color: #1e7a1e; font-size: 16px; font-weight: 800; }
+  .pkg-table .dash { color: #bbb; font-size: 18px; }
+  .pkg-table .section-row td {
+    background: #1a2e5a;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 16px;
+    text-align: right;
+    letter-spacing: 0.3px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .pkg-table .cta-row td {
+    padding: 12px 16px;
+    border-bottom: none;
+  }
+  .pkg-table .cta-row td a {
+    display: block;
+    padding: 10px 16px;
+    background: #eef2fa;
+    color: #1e3d78;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .pkg-table .cta-row td.recommended-col a {
+    background: #1e3d78;
+    color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Package Cards (mobile) ── */
+  .pkg-cards { display: none; flex-direction: column; gap: 20px; margin-bottom: 20px; }
+  .pkg-card {
+    border: 2px solid #d0d9ef;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .pkg-card.recommended { border-color: #1e3d78; box-shadow: 0 4px 20px rgba(30,61,120,0.15); }
+  .pkg-card-badge {
+    background: #f0f5ff; color: #888;
+    font-size: 12px; font-weight: 700;
+    padding: 7px 16px; text-align: center;
+  }
+  .pkg-card.recommended .pkg-card-badge {
+    background: linear-gradient(90deg, #1e3d78, #2a52a0);
+    color: #ffd700;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .pkg-card-header { padding: 18px 20px 14px; border-bottom: 1px solid #e8edf5; }
+  .pkg-card-name { font-size: 18px; font-weight: 800; color: #1a2e5a; margin-bottom: 6px; }
+  .pkg-card-price { font-size: 28px; font-weight: 800; color: #1a2e5a; }
+  .pkg-card-savings { font-size: 12px; color: #2a9d2a; font-weight: 700; margin-top: 4px; }
+  .pkg-card-body { padding: 18px 20px; }
+  .pkg-card-body ul { list-style: none; padding: 0; }
+  .pkg-card-body ul li { font-size: 14px; color: #444; line-height: 1.7; padding: 3px 0; }
+  .pkg-card-body ul li::before { content: '✓ '; color: #1e3d78; font-weight: 800; }
+  .pkg-card-body ul li.section-li { font-weight: 700; color: #1a2e5a; margin-top: 12px; }
+  .pkg-card-body ul li.section-li::before { content: ''; }
+  .pkg-card-cta {
+    display: block; text-align: center; padding: 12px;
+    background: #f0f5ff; color: #1e3d78; font-weight: 700; font-size: 14px;
+    border-top: 1px solid #e0e8f8; text-decoration: none;
+  }
+  .pkg-card.recommended .pkg-card-cta {
+    background: #1e3d78; color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Add-ons pricing table ── */
+  .addons-note {
+    background: #eef2fa;
+    border: 1.5px solid #c8d4ec;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    color: #1a2e5a;
+    line-height: 1.7;
+  }
+  .addons-note strong { font-weight: 700; }
+
+  /* ── Value grid ── */
+  .value-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0;
+  }
+  .value-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #f8faff; border-radius: 8px; padding: 12px 16px;
+    font-size: 14px; color: #333; line-height: 1.5; border: 1px solid #e0e8f8;
+  }
+  .vi { font-size: 18px; flex-shrink: 0; }
+
+  /* ── Savings table ── */
+  .savings-table { width: 100%; border-collapse: collapse; font-size: 14px; border-radius: 8px; overflow: hidden; }
+  .savings-table thead tr { background: #1a2e5a; color: #fff; }
+  .savings-table thead th { padding: 12px 16px; text-align: right; font-weight: 600; font-size: 13px; }
+  .savings-table tbody tr:nth-child(even) { background: #f4f8ff; }
+  .savings-table tbody tr:last-child { background: #e8f0ff; font-weight: 700; color: #1a2e5a; }
+  .savings-table tbody td { padding: 11px 16px; border-bottom: 1px solid #e0e8f5; color: #333; }
+
+  /* ── Callout ── */
+  .callout {
+    background: linear-gradient(135deg, #1a2e5a, #1e3d78); color: #fff;
+    border-radius: 10px; padding: 18px 24px; margin-top: 16px;
+    font-size: 15px; font-weight: 600; text-align: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .callout span { color: #7eb8f7; }
+
+  /* ── Software costs ── */
+  .software-note { background: #f4f8ff; border-radius: 8px; padding: 16px 20px; font-size: 13px; color: #555; line-height: 1.7; }
+  .software-note strong { color: #1a2e5a; }
+  .sw-table { width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 13px; }
+  .sw-table .sw-head td { color: #1a2e5a; font-weight: 700; border-bottom: 1px solid #d0dcf0; padding: 5px 0; }
+  .sw-table td { padding: 6px 0; }
+  .sw-table .sw-total td { font-weight: 700; color: #1a2e5a; padding-top: 8px; border-top: 1px solid #d0dcf0; }
+
+  /* ── Terms grid ── */
+  .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .terms-box { background: #f8faff; border-radius: 8px; padding: 18px 20px; border: 1px solid #e0e8f8; }
+  .terms-box h4 { font-size: 14px; font-weight: 700; color: #1a2e5a; margin-bottom: 10px; }
+  .terms-box ul { list-style: none; padding: 0; font-size: 13.5px; color: #444; line-height: 1.75; }
+  .terms-box ul li::before { content: '· '; color: #1e3d78; font-weight: 700; }
+  .terms-box ul li { margin-bottom: 3px; }
+
+  /* ── Process steps ── */
+  .process-steps { display: flex; gap: 0; position: relative; }
+  .process-steps::before { content: ''; position: absolute; top: 22px; right: 22px; left: 22px; height: 2px; background: #d8e4f7; z-index: 0; }
+  .process-step { flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 4px; }
+  .process-step-num { width: 44px; height: 44px; background: #1a2e5a; color: #fff; border-radius: 50%; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .process-step-label { font-size: 12.5px; color: #555; font-weight: 500; line-height: 1.4; }
+
+  /* ── Signature ── */
+  .signature-section { border-top: 1px solid #e0e8f5; margin-top: 40px; padding-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .sig-box {}
+  .sig-label { font-size: 13px; color: #888; margin-bottom: 30px; }
+  .sig-line { border-top: 1px solid #999; padding-top: 8px; font-size: 13px; color: #555; }
+
+  /* ── Footer ── */
+  .footer {
+    background: #1a2e5a;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #a8c4e8;
+    font-size: 13.5px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .footer .contact-item { margin-bottom: 5px; color: #fff; font-weight: 600; }
+  .footer .contact-item span { color: #fff; font-weight: 600; }
+  .footer .contact-item a { color: #fff; font-weight: 600; text-decoration: none; }
+  .footer .contact-item a:hover { text-decoration: underline; }
+  .footer .tagline { font-size: 14px; color: #7eb8f7; font-weight: 600; text-align: left; max-width: 220px; line-height: 1.5; }
+
+  /* ════════════════════════════════════
+     RESPONSIVE - MOBILE
+  ════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .header { padding: 28px 20px 24px; }
+    .header-top { flex-direction: column; gap: 10px; }
+    .header-meta { text-align: right; }
+    .doc-title { font-size: 22px; }
+    .meta-table { grid-template-columns: 1fr; gap: 8px; }
+
+    .toc { padding: 12px 20px; gap: 6px; }
+
+    .content { padding: 24px 20px 32px; }
+    .pricing-content { padding: 28px 20px 36px; }
+
+    .section-divider { padding: 16px 20px; }
+
+    th, td { padding: 8px 10px; font-size: 13px; }
+
+    .addon-cards { grid-template-columns: 1fr; }
+
+    /* Show cards, hide table on mobile */
+    .pkg-table-wrap { display: none; }
+    .pkg-cards { display: flex; }
+
+    .terms-grid { grid-template-columns: 1fr; }
+
+    .value-grid { grid-template-columns: 1fr; }
+
+    .process-steps {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .process-steps::before { display: none; }
+    .process-step { display: flex; align-items: center; gap: 14px; text-align: right; width: 100%; }
+    .process-step-num { width: 36px; height: 36px; font-size: 14px; flex-shrink: 0; margin: 0; }
+    .process-step-label { font-size: 14px; }
+
+    .signature-section { grid-template-columns: 1fr; gap: 24px; }
+
+    .footer { flex-direction: column; gap: 16px; padding: 20px; text-align: center; }
+    .footer .tagline { text-align: center; }
+
+    .spec-cta { padding: 24px 20px; }
+    .cta-big-btn { font-size: 15px; padding: 14px 28px; }
+
+    .addons-note { font-size: 13px; }
+  }
+
+  @media (max-width: 480px) {
+    .doc-title { font-size: 20px; }
+    .section-title-text { font-size: 17px; }
+    .pkg-card-price { font-size: 24px; }
+  }
+
+  /* Hidden sections */
+  .pricing-hidden { display: none !important; }
+  .spec-hidden { display: none !important; }
+
+  /* ── Executive Summary ── */
+  #summary { background: #f8faff; border-bottom: 2px solid #dce4f5; }
+  #summary .content { padding-bottom: 8px; }
+
+  .exec-summary-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .exec-summary-badge {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #1a2e5a, #1e3d78);
+    color: #7eb8f7;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .exec-summary-title {
+    font-size: 20px; font-weight: 800; color: #1a2e5a;
+  }
+
+  .exec-bg-box {
+    background: #fff;
+    border: 1px solid #dce4f5;
+    border-right: 4px solid #1e3d78;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #3a4e72;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .exec-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .exec-highlight-card {
+    background: #fff;
+    border: 1px solid #dce4f5;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .exec-highlight-icon { font-size: 20px; margin-bottom: 5px; }
+  .exec-highlight-title { font-size: 13px; font-weight: 700; color: #1a2e5a; margin-bottom: 3px; }
+  .exec-highlight-body { font-size: 12px; color: #4a5c80; line-height: 1.6; }
+
+  .exec-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .exec-stat {
+    background: linear-gradient(135deg, #1a2e5a, #1e3d78);
+    color: #fff;
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .exec-stat-num { font-size: 22px; font-weight: 800; color: #7eb8f7; line-height: 1.2; }
+  .exec-stat-label { font-size: 11px; opacity: 0.85; margin-top: 5px; line-height: 1.4; }
+
+  .exec-cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 4px 0 24px;
+  }
+  .cta-secondary-btn {
+    display: inline-block;
+    background: transparent;
+    color: #1e3d78;
+    border: 2px solid #1e3d78;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .cta-secondary-btn:hover { background: #1e3d78; color: #fff; }
+
+  @media (max-width: 768px) {
+    .exec-highlights { grid-template-columns: 1fr; }
+    .exec-stats { grid-template-columns: 1fr; }
+    .exec-cta-row { flex-direction: column; align-items: stretch; }
+    .exec-cta-row a { text-align: center; }
+  }
+
+  /* ── Package Calculator ── */
+  .custom-pkg-calc { background: #f8faff; border: 2px solid #1e3d78; border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+  .calc-title { font-size: 16px; font-weight: 800; color: #1a2e5a; margin-bottom: 4px; }
+  .calc-subtitle { font-size: 13px; color: #4a5c80; margin-bottom: 16px; }
+  .calc-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .calc-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #1a2e5a; cursor: pointer; padding: 9px 12px; border-radius: 8px; transition: background 0.15s; user-select: none; }
+  .calc-item:hover { background: #eef2fb; }
+  .calc-base { background: #e8edf5; cursor: default; font-weight: 600; }
+  .calc-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: #1e3d78; flex-shrink: 0; cursor: pointer; }
+  .calc-price { margin-right: auto; font-weight: 700; color: #1e3d78; font-size: 13px; white-space: nowrap; padding-right: 8px; }
+  .calc-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 700; color: #1a2e5a; border-top: 2px solid #dce4f5; padding-top: 14px; margin-bottom: 14px; }
+  .calc-total-num { font-size: 24px; font-weight: 800; color: #1e3d78; }
+  .calc-confirm-btn { width: 100%; background: linear-gradient(135deg, #1a2e5a, #1e3d78); color: #fff; border: none; border-radius: 50px; padding: 14px 24px; font-family: 'Heebo', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .calc-confirm-btn:hover { opacity: 0.88; }
+
+  /* ── Digital Signature ── */
+  #sig-canvas { border: 1.5px dashed #1e3d78; border-radius: 8px; cursor: crosshair; display: block; width: 100%; height: 120px; touch-action: none; background: #fafcff; margin-bottom: 8px; }
+  .sig-canvas-controls { display: flex; gap: 8px; margin-bottom: 10px; }
+  .sig-canvas-controls button { flex: 1; padding: 9px 12px; border-radius: 8px; font-family: 'Heebo', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.15s; }
+  .sig-clear-btn { background: #f0f2f8; color: #1a2e5a; }
+  .sig-confirm-btn { background: #1e3d78; color: #fff; }
+  .sig-canvas-controls button:hover { opacity: 0.82; }
+  .sig-preview-img { max-width: 100%; height: 80px; object-fit: contain; display: none; border: 1px solid #e0e8f5; border-radius: 6px; padding: 4px; margin-bottom: 8px; background: #fff; }
+  .anat-sig-display { font-family: 'Brush Script MT', cursive; font-size: 38px; color: #1a2e5a; min-height: 54px; display: flex; align-items: center; margin-bottom: 2px; letter-spacing: 1px; }
+  .anat-sig-img { max-width: 200px; height: 75px; object-fit: contain; display: block; margin-bottom: 8px; }
+  .pdf-save-wrap { display: none; text-align: center; margin-top: 24px; padding: 20px 16px; background: #f0f6ff; border-radius: 12px; border: 1px solid #dce4f5; }
+  .pdf-save-btn { background: linear-gradient(135deg, #1a2e5a, #1e3d78); color: #fff; border: none; border-radius: 50px; padding: 16px 36px; font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin-bottom: 10px; display: inline-block; }
+  .pdf-save-btn:hover { opacity: 0.9; }
+  .pdf-hint { font-size: 12px; color: #888; margin: 0; }
+
+  @media (max-width: 768px) {
+    .calc-item { font-size: 13px; padding: 8px 10px; }
+    .calc-total-num { font-size: 20px; }
+    #sig-canvas { height: 100px; }
+    .pdf-save-btn { width: 100%; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; }
+    .toc, .cta-big-btn, .spec-cta, .section-divider, .exec-cta-row, .custom-pkg-calc, #sig-canvas, .sig-canvas-controls, .pdf-save-wrap { display: none !important; }
+    #pricing, .section-divider, #spec { display: block !important; }
+    .spec-hidden, .pricing-hidden { display: block !important; }
+    .sig-preview-img { display: block !important; }
+    #spec, #pricing { background: #fff; }
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+    /* Basic Package Card */
+    .basic-pkg-card {
+      background: #f8faff;
+      border: 2px solid #1e3d78;
+      border-radius: 14px;
+      padding: 24px 28px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .basic-pkg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #d0daf0;
+    }
+    .basic-pkg-name { font-size: 20px; font-weight: 700; color: #1a2e5a; }
+    .basic-pkg-price { font-size: 24px; font-weight: 800; color: #1e3d78; }
+    .basic-pkg-list { list-style: none; padding: 0; margin: 0; }
+    .basic-pkg-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #e8eef8;
+      color: #2d3a50;
+      font-size: 15px;
+    }
+    .basic-pkg-list li:last-child { border-bottom: none; }
+    .basic-pkg-list li::before { content: '✓  '; color: #1e3d78; font-weight: 700; }
+
+    /* Monthly Support */
+    .support-options { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+    .support-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #f8faff;
+      border: 2px solid #d0daf0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .support-option:has(input:checked) { border-color: #1e3d78; background: #eef2fc; }
+    .support-option input[type=radio] { margin-top: 4px; accent-color: #1e3d78; }
+    .support-option-body { flex: 1; }
+    .support-option-title { font-weight: 700; font-size: 16px; color: #1a2e5a; margin-bottom: 4px; }
+    .support-option-desc { font-size: 13px; color: #5a6a80; margin-bottom: 6px; }
+    .support-option-price { font-size: 18px; font-weight: 800; color: #1e3d78; }
+    .hours-selector select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #b0bfd8;
+      border-radius: 8px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 14px;
+      color: #1a2e5a;
+      background: #fff;
+      direction: rtl;
+      margin-top: 6px;
+    }
+    .support-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1a2e5a;
+      background: #f0f4ff;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 768px) {
+      .basic-pkg-card { padding: 16px; }
+      .basic-pkg-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .support-option { padding: 12px 14px; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════ HEADER ════ -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="brand">AP AUTOMATIONS</div>
+        <div class="brand-name">אפיון טכני + הצעת מחיר</div>
+      </div>
+      <div class="header-meta">
+        <div><a href="mailto:office@apauto.co.il" style="color:#fff;text-decoration:none;">office@apauto.co.il</a></div>
+        <div style="color:#fff;">050-6200061</div>
+        <div><a href="https://www.apauto.co.il" target="_blank" style="color:#fff;text-decoration:none;">www.apauto.co.il</a></div>
+      </div>
+    </div>
+    <div class="doc-title">מערכת CRM + צ'אטבוט</div>
+    <div class="doc-subtitle">הקרן הישראלית לזכויות העובד הזר</div>
+    <div class="meta-table">
+      <div class="meta-row"><span class="meta-label">לקוח:</span><span class="meta-value">יוסי קרוהן, רון אובוז | הקרן הישראלית לזכויות העובד הזר</span></div>
+      <div class="meta-row"><span class="meta-label">תאריך:</span><span class="meta-value">27/03/2026</span></div>
+      <div class="meta-row"><span class="meta-label">מכין המסמך:</span><span class="meta-value">ענת רפאלי פלד | AP Automations</span></div>
+      <div class="meta-row"><span class="meta-label">גרסה:</span><span class="meta-value">1.2 - עדכון לאחר פגישת אפיון</span></div>
+    </div>
+  </div>
+
+  <!-- ════ TABLE OF CONTENTS ════ -->
+  <div class="toc">
+    <span class="toc-label">קפצו ל:</span>
+    <a href="#summary">סיכום מנהלים</a>
+    <span class="toc-sep">←</span>
+    <a href="#spec">אפיון מלא</a>
+    <span class="toc-sep">←</span>
+    <a href="#pricing">חבילות ומחירים</a>
+  </div>
+
+  <!-- ════ EXECUTIVE SUMMARY ════ -->
+  <div id="summary">
+    <div class="content">
+
+      <div class="exec-summary-header">
+        <div class="exec-summary-badge">✦</div>
+        <div class="exec-summary-title">סיכום מנהלים</div>
+      </div>
+
+      <div class="exec-bg-box">
+        <strong>הקרן הישראלית לזכויות העובד הזר</strong> מעסיקה כ-12 עובדים. כיום כל העבודה מתבצעת ידנית - לידים מגיעים דרך פייסבוק, תקשורת עם לקוחות מתנהלת בווטסאפ, ומפגשים פיזיים בשעות קבלת קהל. המערכת שנבנה תשנה את אופן הפעולה מקצה לקצה.
+      </div>
+
+      <div class="sub-title" style="margin-bottom:12px;">מה בונים - הרכיבים המרכזיים</div>
+      <div class="exec-highlights">
+        <div class="exec-highlight-card">
+          <div class="exec-highlight-icon">💬</div>
+          <div class="exec-highlight-title">צ'אטבוט + CRM אוריגמי</div>
+          <div class="exec-highlight-body">ניתוב אוטומטי לפי שפה ושירות - 4 ערוצים: ווטסאפ, פייסבוק, אינסטגרם, טיקטוק</div>
+        </div>
+        <div class="exec-highlight-card">
+          <div class="exec-highlight-icon">📊</div>
+          <div class="exec-highlight-title">דשבורד בזמן אמת</div>
+          <div class="exec-highlight-body">המנהל רואה את כל הפעילות - שיחות, לידים, ביצועי נציגים - במקום אחד</div>
+        </div>
+        <div class="exec-highlight-card">
+          <div class="exec-highlight-icon">🗓️</div>
+          <div class="exec-highlight-title">קביעת פגישות אוטומטית</div>
+          <div class="exec-highlight-body">אינטגרציה לGoogle Calendar - הלקוח קובע פגישה מתוך הצ'אט, הנציג מקבל תזכורת</div>
+        </div>
+        <div class="exec-highlight-card">
+          <div class="exec-highlight-icon">🔔</div>
+          <div class="exec-highlight-title">תזכורות אוטומטיות</div>
+          <div class="exec-highlight-body">ווטסאפ/אימייל לפני פגישות, תזכורות למשימות ועוד - אפס no-shows, אפס מעקב ידני</div>
+        </div>
+      </div>
+
+      <div class="sub-title" style="margin-bottom:12px;">תועלות עסקיות צפויות</div>
+      <div class="exec-stats">
+        <div class="exec-stat">
+          <div class="exec-stat-num">25+</div>
+          <div class="exec-stat-label">שעות חיסכון שבועי</div>
+        </div>
+        <div class="exec-stat">
+          <div class="exec-stat-num">&lt;1 דקה</div>
+          <div class="exec-stat-label">זמן תגובה ראשוני<br>(לעומת שעות)</div>
+        </div>
+        <div class="exec-stat">
+          <div class="exec-stat-num">~3 חודשים</div>
+          <div class="exec-stat-label">החזר השקעה משוער</div>
+        </div>
+      </div>
+
+      <div class="exec-cta-row">
+        <a href="#spec" class="reveal-spec-btn cta-big-btn">לאפיון המפורט ↓</a>
+        <a href="#pricing" class="cta-secondary-btn">לחבילות ומחירים ↓</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       PART 1: TECHNICAL SPEC
+  ════════════════════════════════════ -->
+  <div id="spec" class="spec-hidden">
+    <div class="content">
+
+      <!-- Section 1 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <div class="section-title-text">רקע ומטרות הפרויקט</div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">1.1 רקע</div>
+          <p>הקרן מספקת שירותים לעובדים זרים בישראל: ביטוח רפואי, חישוב זכויות פנסיוניות ועבודה, הסדרת רישיונות נהיגה וייעוץ משפטי. הארגון מקבל <strong>כ-1,000 הודעות ביום</strong> דרך ערוצים שונים, בנוסף לפניות דרך פייסבוק, טיקטוק, אינסטגרם, מייל, אתר וטלפון.</p>
+          <br>
+          <p>כיום תהליך הסינון והניתוב מתבצע ידנית. ניסיון קודם להפעיל בוט בפייסבוק נחסם על ידי הפלטפורמה. מטרת הפרויקט: שכל פנייה שנכנסת תגיע לנציג הנכון בצורה אוטומטית, ללא התערבות ידנית.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">1.2 מטרות עסקיות</div>
+          <ul>
+            <li>צמצום עבודה ידנית של סינון וניתוב - חיסכון של <strong>+25 שעות בשבוע</strong></li>
+            <li>אפס פניות שנופלות בין הכיסאות</li>
+            <li>ניתוב כל פנייה לנציג המתאים בתחום הנכון</li>
+            <li>תחליף חלקי לנציג אנושי בשעות השיא - מענה 24/7 לפניות נפוצות</li>
+            <li>שקיפות ניהולית בזמן אמת על כל הערוצים והנציגים</li>
+            <li>תשתית לשכבות AI ואוטומציה נוספות בעתיד</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <div class="section-title-text">ארכיטקטורת המערכת</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>שכבה</th><th>כלי</th><th>תפקיד</th></tr></thead>
+            <tbody>
+              <tr><td>צ'אטבוט וניהול ערוצים</td><td><strong>UChat</strong></td><td>זרימת שיחה, זיהוי שפה, ניתוב, תיוג</td></tr>
+              <tr><td>מנוע אוטומציה ואינטגרציה</td><td><strong>Make</strong></td><td>חיבור בין כל המערכות, טריגרים, זרימות</td></tr>
+              <tr><td>CRM וניהול נתונים</td><td><strong>אוריגמי</strong></td><td>מסד נתונים, דשבורדים, הרשאות</td></tr>
+              <tr><td>ערוץ וואטסאפ</td><td><strong>WhatsApp Business API</strong></td><td>מספר עסקי רשמי נפרד לצ'אטבוט</td></tr>
+              <tr><td>ערוצים חברתיים</td><td><strong>UChat</strong></td><td>פייסבוק מסנג'ר, אינסטגרם DM, טיקטוק</td></tr>
+              <tr><td>יומן ותיאום</td><td><strong>Google Calendar</strong></td><td>קביעת פגישות</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          <strong>בחירת אוריגמי CRM:</strong> על בסיס פגישת האפיון, אוריגמי עולה כמועדפת בשל: עיצוב גמיש ומותאם אישית, חתימות דיגיטליות, שליחת שאלונים, ותמיכה ב-4 משתמשים עם הרשאות שונות.
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <div class="section-title-text">אפיון הצ'אטבוט</div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">3.1 נקודות כניסה</div>
+          <ul>
+            <li><strong>וואטסאפ ביזנס - מספר ייעודי חדש לבוט</strong></li>
+            <li>פייסבוק מסנג'ר - דף הקרן</li>
+            <li>אינסטגרם Direct - חשבון הקרן</li>
+            <li>טיקטוק (בהתאם לאפשרויות הפלטפורמה)</li>
+          </ul>
+          <div class="note warning">
+            <strong>חובה: מספר וואטסאפ נפרד</strong> - המספר הנוכחי חווה חסימת בוט בעבר. הפעלת בוט על מספר קיים עם היסטוריית שיחות גבוהה מסכנת את הזמינות. יש לפתוח מספר WhatsApp Business חדש ייעודי לבוט.
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">3.2 שפת הצ'אטבוט</div>
+          <p>הצ'אטבוט יפעל <strong>באנגלית בלבד</strong>. זיהוי שפה ייעשה לצורך ניתוב לנציג המתאים.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">3.3 זרימת השיחה</div>
+          <div class="spec-steps">
+            <div class="spec-step">
+              <div class="spec-step-num">1</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">סינון מיקום</div>
+                <div class="spec-step-desc">"Are you currently in Israel?" - אם לא, הבוט מסביר שהשירותים זמינים לעובדים בישראל בלבד ומסיים את השיחה.</div>
+              </div>
+            </div>
+            <div class="spec-step">
+              <div class="spec-step-num">2</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">זיהוי שפה</div>
+                <div class="spec-step-desc">הבוט מזהה את שפת ההודעה או מציג תפריט בחירה. הניתוב לנציג נעשה לפי השפה שזוהתה.</div>
+              </div>
+            </div>
+            <div class="spec-step">
+              <div class="spec-step-num">3</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">בחירת סוג שירות</div>
+                <div class="spec-step-desc">ביטוח רפואי / חישוב זכויות ופנסיה / רישיון נהיגה / ייעוץ משפטי / בקשת מקלט / שאלה כללית</div>
+              </div>
+            </div>
+            <div class="spec-step">
+              <div class="spec-step-num">4</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">תיוג וניתוב</div>
+                <div class="spec-step-desc">הליד מתויג ב-CRM עם: שפה, סוג שירות, ערוץ מקור, תאריך ושעה, סטטוס: חדש. הנציג הרלוונטי מקבל התראה.</div>
+              </div>
+            </div>
+            <div class="spec-step">
+              <div class="spec-step-num">5</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">העברה לנציג אנושי</div>
+                <div class="spec-step-desc">בכל שלב: "agent" / "help" - העברה לנציג. הבוט מסמן את הליד כ"ממתין לנציג".</div>
+              </div>
+            </div>
+            <div class="spec-step">
+              <div class="spec-step-num">6</div>
+              <div class="spec-step-body">
+                <div class="spec-step-title">Cross-sell - חבילה חכמה ומעלה</div>
+                <div class="spec-step-desc">בסוף זרימה, הבוט מציע שירות נוסף רלוונטי לפי פרופיל הלקוח.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">ניתוב לפי שפה</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>שפה</th><th>נציג / צוות משויך</th></tr></thead>
+              <tbody>
+                <tr><td>עברית</td><td>צוות עברית</td></tr>
+                <tr><td>רוסית</td><td>נציג דובר רוסית</td></tr>
+                <tr><td>סינית</td><td>נציג דובר סינית</td></tr>
+                <tr><td>פיליפינית / טגלוג</td><td>נציג דובר פיליפינית</td></tr>
+                <tr><td>סרילנקה</td><td>נציג דובר סינהלית</td></tr>
+                <tr><td>הודו</td><td>נציג דובר הודית</td></tr>
+                <tr><td>אוקראינית</td><td>נציג דובר אוקראינית</td></tr>
+                <tr><td>אחר</td><td>נציג ברירת מחדל</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">3.4 מחוץ לתכולה של חבילת הבסיס</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>יכולת</th><th>זמינות</th></tr></thead>
+              <tbody>
+                <tr><td>מענה AI חופשי לשאלות</td><td><span class="badge badge-check">זמין כתוספת - AI</span></td></tr>
+                <tr><td>חישוב זכויות</td><td><span class="badge badge-check">זמין כתוספת - שאלון חכם</span></td></tr>
+                <tr><td>עיבוד תשלומים וסנכרון למערכת</td><td><span class="badge badge-check">זמין כתוספת - New Pay</span></td></tr>
+                <tr><td>אינטגרציה ל-WeChat</td><td><span class="badge badge-check">זמין כתוספת</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <div class="section-title-text">אפיון ה-CRM</div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">4.1 שדות רשומת ליד</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>שדה</th><th>סוג</th><th>הערות</th></tr></thead>
+              <tbody>
+                <tr><td>שם מלא</td><td>טקסט</td><td>-</td></tr>
+                <tr><td>מספר טלפון</td><td>טקסט</td><td>מספר וואטסאפ - מגיע מהבוט</td></tr>
+                <tr><td>ערוץ מקור</td><td>רשימה</td><td>וואטסאפ / פייסבוק / טיקטוק / אינסטגרם / אתר / טלפון / מייל</td></tr>
+                <tr><td>שפה</td><td>רשימה</td><td>מתויג על ידי הבוט</td></tr>
+                <tr><td>סוג שירות</td><td>רשימה</td><td>מתויג על ידי הבוט</td></tr>
+                <tr><td>תת-קטגוריה שירות</td><td>רשימה</td><td>ממתין לקובץ Excel מרון</td></tr>
+                <tr><td>סטטוס</td><td>רשימה</td><td>חדש / בטיפול / ממתין / סגור / לא רלוונטי</td></tr>
+                <tr><td>נציג משויך</td><td>קישור</td><td>מקושר לטבלת משתמשים</td></tr>
+                <tr><td>תאריך יצירה</td><td>אוטומטי</td><td>תאריך ושעה</td></tr>
+                <tr><td>פעילות אחרונה</td><td>אוטומטי</td><td>-</td></tr>
+                <tr><td>הערות</td><td>טקסט חופשי</td><td>-</td></tr>
+                <tr><td>מסמכים</td><td>קבצים מצורפים</td><td>-</td></tr>
+                <tr><td>סטטוס תשלום</td><td>רשימה</td><td>שולם / ממתין / באיחור</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">4.2 הרשאות משתמשים (4 סה"כ)</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>תפקיד</th><th>רמת גישה</th></tr></thead>
+              <tbody>
+                <tr><td>מנהל מערכת - 2 משתמשים</td><td>גישה מלאה - כל הלידים, כל הנציגים, כל הדוחות</td></tr>
+                <tr><td>ראש צוות</td><td>צפייה ועריכה של כל הלידים + דוחות ביצועים, ללא ניהול הגדרות</td></tr>
+                <tr><td>נציג טיפול בלידים</td><td>צפייה ועריכה של לידים המשויכים אליו בלבד</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">4.3 דשבורדים</div>
+          <ul>
+            <li>סך לידים לפי טווח תאריכים</li>
+            <li>לידים לפי שפה / סוג שירות</li>
+            <li>לידים לפי נציג - תצוגת עומס עבודה</li>
+            <li>פילוח סטטוסים - חדש / בטיפול / סגור</li>
+            <li>פילוח לפי ערוץ מקור</li>
+            <li>פילוח הכנסות (אם יוזנו במסודר במערכת)</li>
+            <li>עוד דשבורדים - בהתאם לצורך</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">5</div>
+          <div class="section-title-text">זרימות אוטומציה (Make)</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>טריגר</th><th>פעולה</th></tr></thead>
+            <tbody>
+              <tr><td>הודעה חדשה בוואטסאפ</td><td>יצירת ליד ב-CRM, הפעלת זרימת הבוט</td></tr>
+              <tr><td>הודעה חדשה בפייסבוק / אינסטגרם</td><td>יצירת ליד ב-CRM, הפעלת זרימת הבוט</td></tr>
+              <tr><td>הבוט השלים זיהוי שפה ושירות</td><td>תיוג ליד, שיוך נציג, שליחת התראה</td></tr>
+              <tr><td>סטטוס ליד השתנה ל"ממתין"</td><td>התראה לנציג המשויך</td></tr>
+              <tr><td>אין מענה מנציג אחרי X שעות</td><td>תזכורת לנציג / העברה לראש צוות</td></tr>
+              <tr><td>קביעת פגישה דרך הבוט</td><td>יצירת אירוע ב-Google Calendar + שליחת אישור ללקוח</td></tr>
+              <tr><td>הגשת טופס קיים (זכויות, מקלט, קטנוע)</td><td>יצירה / עדכון ליד ב-CRM</td></tr>
+              <tr><td>ליד הושלם + cross-sell</td><td>שליחת הצעה לשירות נוסף רלוונטי</td></tr>
+            </tbody>
+          </table>
+        </div>
+           </div>
+
+      <!-- Section 6 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">6</div>
+          <div class="section-title-text">תוספות אפשריות למערכת</div>
+        </div>
+        <div class="addon-cards">
+          <div class="addon-card">
+            <div class="addon-card-title">שדרוג AI לצ'אטבוט (UChat AI)</div>
+            <ul class="addon-list">
+              <li>מענה על מידע כללי אודות החברה והשירותים</li>
+              <li>Cross-sell חכם - הצעת שירות נוסף בסוף זרימה</li>
+              <li>מיון לידים לפי פוטנציאל מכירה</li>
+              <li>Fallback לנציג אנושי כשנדרש</li>
+            </ul>
+          </div>
+          <div class="addon-card">
+            <div class="addon-card-title">שאלון חכם לחישוב זכויות</div>
+            <ul class="addon-list">
+              <li>שאלון מובנה שלב-שלב לאיסוף נתונים</li>
+              <li>חיבור למחשבון הקיים (hakeren.org.il/calculation)</li>
+              <li>תוצאה נשלחת למשתמש בוואטסאפ</li>
+              <li>נתוני החישוב נשמרים ב-CRM</li>
+            </ul>
+          </div>
+          <div class="addon-card">
+            <div class="addon-card-title">חוזים דיגיטליים</div>
+            <ul class="addon-list">
+              <li>תבניות חוזה בפלטפורמת חתימה דיגיטלית</li>
+              <li>מילוי אוטומטי עם נתוני הלקוח מ-CRM</li>
+              <li>שליחה ללקוח לחתימה דיגיטלית</li>
+              <li>חוזה חתום נשמר ברשומת הליד</li>
+            </ul>
+          </div>
+          <div class="addon-card">
+            <div class="addon-card-title">ניהול תשלומים (New Pay)</div>
+            <ul class="addon-list">
+              <li>חיבור למערכת New Pay</li>
+              <li>מעקב סטטוס תשלום לפי ליד ב-CRM</li>
+              <li>תזכורות לתשלומים קרובים ומאוחרים</li>
+              <li>בכפוף לתמיכת New Pay ב-API הנדרש</li>
+            </ul>
+          </div>
+          <div class="addon-card" style="grid-column: span 2;">
+            <div class="addon-card-title">אינטגרציה ל-WeChat</div>
+            <ul class="addon-list" style="columns: 2; column-gap: 24px;">
+              <li>חיבור WeChat כערוץ קליטה נוסף</li>
+              <li>זרימת בוט זהה: זיהוי שפה, תיוג, ניתוב</li>
+              <li>לידים מ-WeChat מאוחדים באותו CRM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">7</div>
+          <div class="section-title-text">שאלות פתוחות - נדרש מהלקוח</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>פריט</th><th>סטטוס</th></tr></thead>
+            <tbody>
+              <tr><td>בחירת פלטפורמת CRM</td><td><span class="badge badge-check">אוריגמי - בבדיקה סופית</span></td></tr>
+              <tr><td>נפח יומי</td><td><span class="badge badge-done">~1,000 הודעות/יום - אושר</span></td></tr>
+              <tr><td>מספר וואטסאפ ייעודי לבוט</td><td><span class="badge badge-done">נפרד - הוחלט</span></td></tr>
+              <tr><td>רשימת נציגים לפי שפה ופרטי קשר</td><td><span class="badge badge-pending">ממתין</span></td></tr>
+              <tr><td>רשימה מלאה של סוגי שירות ותת-קטגוריות</td><td><span class="badge badge-pending">ממתין ל-Excel</span></td></tr>
+              <tr><td>מסמך FAQ לאימון AI</td><td><span class="badge badge-pending">ממתין</span></td></tr>
+              <tr><td>תבניות חוזים</td><td><span class="badge badge-pending">ממתין</span></td></tr>
+              <tr><td>גישה לדף הפייסבוק וחשבון האינסטגרם</td><td><span class="badge badge-pending">ממתין</span></td></tr>
+              <tr><td>גישה ל-Google Workspace של הארגון</td><td><span class="badge badge-pending">ממתין</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 8 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">8</div>
+          <div class="section-title-text">לוח זמנים לפי שלבים</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>שלב</th><th>תוכן</th><th>משך</th></tr></thead>
+            <tbody>
+              <tr><td><strong>שלב 1</strong></td><td>אפיון סופי, בחירת CRM, קבלת גישות וחומרים</td><td>שבוע 1-2</td></tr>
+              <tr><td><strong>שלב 2</strong></td><td>בניית מסד הנתונים ב-CRM, הגדרת משתמשים והרשאות</td><td>שבוע 2-3</td></tr>
+              <tr><td><strong>שלב 3</strong></td><td>בניית הצ'אטבוט ב-UChat, חיבור לכל הערוצים</td><td>שבוע 3-5</td></tr>
+              <tr><td><strong>שלב 4</strong></td><td>הקמת זרימות האוטומציה ב-Make</td><td>שבוע 5-6</td></tr>
+              <tr><td><strong>שלב 5</strong></td><td>בדיקות QA מקיפות של כל התרחישים</td><td>שבוע 6-7</td></tr>
+              <tr><td><strong>שלב 6</strong></td><td>הדרכת צוות, תיקונים אחרונים, עלייה לאוויר</td><td>שבוע 7-8</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">לוח הזמנים מתחיל ממועד חתימת ההסכם וקבלת כל הגישות והחומרים הנדרשים.</div>
+      </div>
+
+      <!-- Section 9 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">9</div>
+          <div class="section-title-text">סיכונים ותלויות</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>סיכון</th><th>השפעה</th><th>מענה</th></tr></thead>
+            <tbody>
+              <tr><td>עיכוב בקבלת גישות מהלקוח</td><td>דחיית לוח הזמנים</td><td>ימי עבודה נספרים מקבלת החומרים בפועל</td></tr>
+              <tr><td>New Pay לא תומך ב-API</td><td>תוספת תשלומים לא ניתנת לביצוע</td><td>תוספת מותנית - מפורש בהצעה</td></tr>
+              <tr><td>חסימת בוט על ידי פייסבוק / וואטסאפ</td><td class="risk-high">שיבוש בזמינות הבוט</td><td>מספר וואטסאפ נפרד ייעודי לבוט</td></tr>
+              <tr><td>שינויים מהותיים בתכולה בזמן הפיתוח</td><td class="risk-med">חריגה בזמן ובתקציב</td><td>כל שינוי מהותי מתומחר ומאושר מראש</td></tr>
+              <tr><td>נפח הודעות גבוה (~1,000/יום)</td><td class="risk-med">עומס על הבוט</td><td>סינון ומחיקת משתמשים לא רלוונטיים</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CTA Bottom of Spec -->
+      <div class="spec-cta">
+        <p>האפיון שלמעלה מתאר את המערכת שתיבנה עבורכם - ברמת פירוט מלאה.<br>
+        <strong>מוכנים להתחיל?</strong> בחרו את רמת ההשקעה שמתאימה לכם.</p>
+        <a href="#pricing" class="cta-big-btn">לבחירת חבילה ← התחלת העבודה</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ DIVIDER ════ -->
+  <div class="section-divider pricing-hidden">
+    <div class="section-divider-inner">הצעת יישום ומחירים</div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       PART 2: BUSINESS PROPOSAL
+  ════════════════════════════════════ -->
+  <div id="pricing" class="pricing-hidden">
+    <div class="pricing-content">
+
+      <!-- Basic Package Card -->
+      <div class="prop-section">
+        <div class="prop-section-title">מה כוללת חבילת הבסיס</div>
+        <div class="basic-pkg-card">
+          <div class="basic-pkg-header">
+            <div class="basic-pkg-name">חבילה בסיסית</div>
+            <div class="basic-pkg-price">12,000 ₪</div>
+          </div>
+          <ul class="basic-pkg-list">
+            <li>צ'אטבוט + CRM אוריגמי (4 משתמשים)</li>
+            <li>ניתוב לפי שפה, שירות וערוץ</li>
+            <li>דשבורדים בזמן אמת</li>
+            <li>אימות Meta + מספר וואטסאפ ייעודי</li>
+            <li>Google Calendar + תזכורות</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Package Calculator -->
+      <div class="prop-section">
+        <div class="addons-note">
+          רוצים להוסיף שירותים נוספים? פשוט סמנו את מה שרלוונטי לכם והסכום יתעדכן אוטומטית.
+        </div>
+        <div class="custom-pkg-calc">
+          <div class="calc-title">🛠️ בנה חבילה מותאמת</div>
+          <div class="calc-subtitle">בחר בסיסית ועוד רכיבים לפי הצורך - הסכום יתעדכן אוטומטית</div>
+          <div class="calc-items">
+            <label class="calc-item calc-base">
+              <input type="checkbox" checked disabled> חבילה בסיסית - כולל CRM + צ'אטבוט + 4 ערוצים + דשבורד + Calendar
+              <span class="calc-price">12,000 ₪</span>
+            </label>
+            <label class="calc-item">
+              <input type="checkbox" class="addon-cb" data-price="3000" data-name="AI מכירתי"> AI מכירתי - cross-sell חכם, מיון לידים לפי פוטנציאל
+              <span class="calc-price">3,000 ₪</span>
+            </label>
+            <label class="calc-item">
+              <input type="checkbox" class="addon-cb" data-price="2500" data-name="חוזים דיגיטליים"> חוזים דיגיטליים - מילוי אוטומטי + חתימה דיגיטלית
+              <span class="calc-price">2,500 ₪</span>
+            </label>
+            <label class="calc-item">
+              <input type="checkbox" class="addon-cb" data-price="2000" data-name="שאלון חישוב זכויות"> שאלון חישוב זכויות - שאלון מובנה + פלט בוואטסאפ
+              <span class="calc-price">2,000 ₪</span>
+            </label>
+            <label class="calc-item">
+              <input type="checkbox" class="addon-cb" data-price="1800" data-name="ניהול תשלומים"> ניהול תשלומים (New Pay) - מעקב + תזכורות + עדכון CRM
+              <span class="calc-price">1,800 ₪</span>
+            </label>
+            <label class="calc-item">
+              <input type="checkbox" class="addon-cb" data-price="1500" data-name="אינטגרציה WeChat"> אינטגרציה WeChat - ערוץ נוסף לדוברי סינית
+              <span class="calc-price">1,500 ₪</span>
+            </label>
+          </div>
+          <div class="calc-total-row">
+            <span>סה"כ חד פעמי:</span>
+            <span id="calc-total" class="calc-total-num">12,000 ₪</span>
+          </div>
+          <button class="calc-confirm-btn" onclick="selectCustomPackage()">✓ בחר חבילה מותאמת זו והמשך לחתימה</button>
+        </div>
+      </div>
+
+      <!-- Monthly Support -->
+      <div class="prop-section">
+        <div class="prop-section-title">תמיכה חודשית לאחר ההקמה</div>
+        <div class="calc-subtitle" style="margin-bottom:18px;">בחרו אחת משתי אפשרויות התמיכה — הסכום החודשי יתוסף לסה"כ למעלה</div>
+
+        <div class="support-options">
+          <label class="support-option">
+            <input type="radio" name="support-type" value="warranty" checked>
+            <div class="support-option-body">
+              <div class="support-option-title">אחריות ותקינות</div>
+              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים</div>
+              <div class="support-option-price">1,000 ₪ / חודש</div>
+            </div>
+          </label>
+
+          <label class="support-option">
+            <input type="radio" name="support-type" value="hours">
+            <div class="support-option-body">
+              <div class="support-option-title">סל שעות חודשי</div>
+              <div class="support-option-desc">תמיכה + פיתוח משיפורים — שעות עבודה לפי בחירתכם</div>
+              <div class="hours-selector">
+                <select id="hours-select" disabled>
+                  <option value="10" data-rate="500">10 שעות — 500 ₪/שעה = 5,000 ₪/חודש</option>
+                  <option value="20" data-rate="400">20 שעות — 400 ₪/שעה = 8,000 ₪/חודש</option>
+                  <option value="30" data-rate="400">30 שעות — 400 ₪/שעה = 12,000 ₪/חודש</option>
+                  <option value="50" data-rate="400">50 שעות — 400 ₪/שעה = 20,000 ₪/חודש</option>
+                </select>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="support-total-row">
+          <span>תמיכה חודשית:</span>
+          <span id="support-total" class="calc-total-num">1,000 ₪/חודש</span>
+        </div>
+        <div class="calc-total-row" style="margin-top:8px; font-size:15px; border-top: 2px solid #1e3d78; padding-top:12px;">
+          <span>סה"כ כולל (חד פעמי + חודש ראשון):</span>
+          <span id="grand-total" class="calc-total-num" style="color:#1e3d78;">13,000 ₪</span>
+        </div>
+      </div>
+
+      <!-- Value / Savings -->
+      <div class="prop-section">
+        <div class="prop-section-title">חיסכון צפוי</div>
+        <div class="table-wrap">
+          <table class="savings-table">
+            <thead><tr><th>תחום</th><th>היום</th><th>אחרי ההקמה</th></tr></thead>
+            <tbody>
+              <tr><td>סינון מיקום ושפה</td><td>~8 שעות/שבוע</td><td>~0 שעות</td></tr>
+              <tr><td>ניתוב לנציג הנכון</td><td>~6 שעות/שבוע</td><td>~0 שעות</td></tr>
+              <tr><td>מענה לשאלות נפוצות (עם AI)</td><td>~8 שעות/שבוע</td><td>~1 שעה</td></tr>
+              <tr><td>מעקב ותזכורות ידניות</td><td>~5 שעות/שבוע</td><td>~0 שעות</td></tr>
+              <tr><td><strong>סה"כ</strong></td><td><strong>~27 שעות/שבוע</strong></td><td><strong>&lt;2 שעות/שבוע</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          חיסכון של <span>25+ שעות בשבוע</span> = ROI תוך פחות מ-3 חודשים
+        </div>
+      </div>
+
+      <!-- Software Costs -->
+      <div class="prop-section">
+        <div class="prop-section-title">עלויות תוכנה חודשיות</div>
+        <div class="software-note">
+          💡 <strong>משולם ישירות לצד ג' - לא כלול במחיר ההקמה:</strong>
+          <table class="sw-table">
+            <tr class="sw-head"><td>פלטפורמה</td><td>פרטים</td><td style="text-align:left;">עלות חודשית</td></tr>
+            <tr><td>אוריגמי CRM</td><td>90 ₪/משתמש × 4 משתמשים</td><td style="text-align:left;">360 ₪</td></tr>
+            <tr><td>Make (אוטומציות)</td><td>-</td><td style="text-align:left;">~$10</td></tr>
+            <tr><td>UChat Pro</td><td>כולל 1,000 bot users</td><td style="text-align:left;">$15</td></tr>
+            <tr><td>UChat - users נוספים</td><td>$5 לכל 1,000 נוספים</td><td style="text-align:left;">לפי שימוש</td></tr>
+            <tr><td>AI שימוש (אם תוספת AI)</td><td>OpenAI / Anthropic API</td><td style="text-align:left;">משתנה</td></tr>
+            <tr class="sw-total"><td>סה"כ משוער (ללא AI)</td><td></td><td style="text-align:left;">~$25 + 360 ₪/חודש</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Value bullets -->
+      <div class="prop-section">
+        <div class="prop-section-title">מה הקרן מקבלת</div>
+        <div class="value-grid">
+          <div class="value-item"><span class="vi">🕐</span><span>מענה מיידי 24/7 - ללא המתנה לנציג</span></div>
+          <div class="value-item"><span class="vi">🎯</span><span>זיהוי שפה - ניתוב לנציג המתאים</span></div>
+          <div class="value-item"><span class="vi">🚫</span><span>אפס פניות שנופלות בין הכיסאות</span></div>
+          <div class="value-item"><span class="vi">📊</span><span>דשבורד בזמן אמת ל-4 המשתמשים</span></div>
+          <div class="value-item"><span class="vi">⏱</span><span>חיסכון משוער: מעל 25 שעות עבודה ידנית בשבוע</span></div>
+          <div class="value-item"><span class="vi">🔄</span><span>Cross-sell אוטומטי - הצגת שירות נוסף לכל לקוח</span></div>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="prop-section">
+        <div class="prop-section-title">תנאים ולוח זמנים</div>
+        <div class="terms-grid">
+          <div class="terms-box">
+            <h4>💳 תנאי תשלום</h4>
+            <ul>
+              <li>50% מקדמה בעת אישור ההצעה</li>
+              <li>50% עם השלמת הפרויקט ומסירתו</li>
+              <li>ריטיינר תחזוקה: <strong>1,000 ₪/חודש</strong></li>
+              <li>העברה בנקאית: <strong>10-998-33145158</strong></li>
+            </ul>
+          </div>
+          <div class="terms-box">
+            <h4>📅 לוח זמנים</h4>
+            <ul>
+              <li>אספקה עד <strong>8 שבועות</strong> מאישור ההצעה</li>
+              <li>ימי עבודה נספרים ממועד קבלת כל החומרים</li>
+              <li>30 יום תמיכה בתקלות - כלולים</li>
+              <li>הצעה בתוקף ל-<strong>14 ימי עסקים</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contract Terms -->
+      <div class="prop-section">
+        <div class="prop-section-title">תנאי ההתקשרות</div>
+        <div class="terms-grid">
+          <div class="terms-box">
+            <h4>📋 כללי</h4>
+            <ul>
+              <li>תמיכה בתקלות ל-30 יום מהעלייה לאוויר</li>
+              <li>שינויים מהותיים מעבר לתכולה יתומחרו בנפרד</li>
+              <li>השירותים מבוססים על פלטפורמות צד ג' - תיתכן מגבלה שאינה בשליטת נותנת השירות</li>
+              <li>המערכות יועברו ללקוח. שיטות עבודה ותבניות נשארות בבעלות AP Automations</li>
+              <li>כל מידע עסקי יישמר בסודיות מלאה</li>
+            </ul>
+          </div>
+          <div class="terms-box">
+            <h4>⚠ ביטול והפסקת עבודה</h4>
+            <ul>
+              <li>כל צד רשאי להודיע על סיום בהתראה של 7 ימי עסקים</li>
+              <li>ביטול עד 7 ימים מהחתימה: זיכוי מלא פחות 500 ₪</li>
+              <li>ביטול אחרי תחילת עבודה: תשלום מינימום 50%</li>
+              <li>ביטול אחרי אפיון ובניית מסד נתונים: תשלום מלא</li>
+              <li>עיכוב 14+ ימי עסקים מהלקוח: הקפאת הפרויקט</li>
+            </ul>
+          </div>
+        </div>
+        <div class="terms-box" style="margin-top:16px;">
+          <h4>✅ התחייבויות הלקוח</h4>
+          <ul>
+            <li>מסירת גישות ומסמכים תוך 5 ימי עסקים מהחתימה</li>
+            <li>ימי העבודה נספרים רק ממועד קבלת כל החומרים</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Process Steps -->
+      <div class="prop-section">
+        <div class="prop-section-title">איך מתקדמים</div>
+        <div class="process-steps">
+          <div class="process-step"><div class="process-step-num">1</div><div class="process-step-label">אישור ההצעה + תשלום מקדמה</div></div>
+          <div class="process-step"><div class="process-step-num">2</div><div class="process-step-label">פגישת Kickoff + העברת גישות</div></div>
+          <div class="process-step"><div class="process-step-num">3</div><div class="process-step-label">הקמה (שבועות 1-6)</div></div>
+          <div class="process-step"><div class="process-step-num">4</div><div class="process-step-label">פגישת עדכון והתאמה</div></div>
+          <div class="process-step"><div class="process-step-num">5</div><div class="process-step-label">בדיקות + הדרכה ומסירה</div></div>
+        </div>
+      </div>
+
+      <!-- Signature -->
+      <div class="signature-section">
+        <div class="sig-box">
+          <div class="sig-label">חבילה נבחרת: <span id="selected-package">_______________________</span></div>
+          <div class="sig-label">חתימת הלקוח - יוסי קרוהן / רון אובוז</div>
+          <canvas id="sig-canvas"></canvas>
+          <div class="sig-canvas-controls">
+            <button class="sig-clear-btn" onclick="clearSignature()">🗑 מחק</button>
+            <button class="sig-confirm-btn" onclick="confirmSignature()">אשר חתימה ✓</button>
+          </div>
+          <img id="sig-preview" class="sig-preview-img" alt="חתימה">
+          <div class="sig-label">תאריך: <span id="sig-date">___________</span></div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-label">חתימת נותנת השירות</div>
+          <div class="anat-sig-display">ענת רפאלי פלד</div>
+          <div class="sig-line">ענת רפאלי פלד - AP Automations</div>
+          <div class="sig-label">תאריך: 28/03/2026</div>
+        </div>
+      </div>
+
+      <div class="pdf-save-wrap" id="pdf-save-wrap">
+        <button class="pdf-save-btn" onclick="window.print()">💾 שמור את המסמך החתום כ-PDF</button>
+        <p class="pdf-hint">בחלון שנפתח - שנה את היעד ל-"שמור כ-PDF" ולחץ שמור</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <div class="footer">
+    <div>
+      <div class="contact-item">📧 <a href="mailto:office@apauto.co.il">office@apauto.co.il</a></div>
+      <div class="contact-item">📞 <span>050-6200061</span></div>
+      <div class="contact-item">🌐 <a href="https://www.apauto.co.il" target="_blank">www.apauto.co.il</a></div>
+    </div>
+    <div class="tagline">ענת רפאלי פלד<br>AP Automations<br>CRM ואוטומציות חכמות</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+  function revealSpec() {
+    document.querySelectorAll('.spec-hidden').forEach(function(el) {
+      el.classList.remove('spec-hidden');
+    });
+  }
+
+  function revealPricing() {
+    document.querySelectorAll('.pricing-hidden').forEach(function(el) {
+      el.classList.remove('pricing-hidden');
+    });
+  }
+
+  function scrollTo(el) {
+    if (el) {
+      setTimeout(function() {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  }
+
+  // Anchor links
+  document.querySelectorAll('a[href^="#"]:not(.pkg-select-btn)').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = this.getAttribute('href');
+      var target = document.querySelector(targetId);
+
+      if (targetId === '#pricing') {
+        revealSpec();
+        revealPricing();
+        scrollTo(target);
+      } else if (targetId === '#spec' || this.classList.contains('reveal-spec-btn')) {
+        revealSpec();
+        revealPricing(); // also reveal so internal spec CTA can scroll to pricing
+        scrollTo(target);
+      } else if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Package selection buttons - fill signature, scroll to it
+  document.querySelectorAll('.pkg-select-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      revealPricing();
+      var pkgName = this.getAttribute('data-package');
+      var field = document.getElementById('selected-package');
+      if (field) {
+        field.textContent = pkgName;
+        field.style.fontWeight = '700';
+        field.style.color = '#1e3d78';
+      }
+      var sigSection = document.querySelector('.signature-section');
+      scrollTo(sigSection);
+    });
+  });
+
+  // ── Package Calculator ──
+  function updateSupportTotal() {
+    var type = document.querySelector('input[name="support-type"]:checked').value;
+    var sel = document.getElementById('hours-select');
+    sel.disabled = (type !== 'hours');
+    if (type === 'warranty') {
+      document.getElementById('support-total').textContent = '1,000 ₪/חודש';
+    } else {
+      var opt = sel.options[sel.selectedIndex];
+      var monthly = parseInt(opt.value) * parseInt(opt.getAttribute('data-rate'));
+      document.getElementById('support-total').textContent = monthly.toLocaleString('he-IL') + ' ₪/חודש';
+    }
+    updateGrandTotal();
+  }
+
+  function updateHoursTotal() {
+    var sel = document.getElementById('hours-select');
+    var opt = sel.options[sel.selectedIndex];
+    var monthly = parseInt(opt.value) * parseInt(opt.getAttribute('data-rate'));
+    document.getElementById('support-total').textContent = monthly.toLocaleString('he-IL') + ' ₪/חודש';
+    updateGrandTotal();
+  }
+
+  function updateGrandTotal() {
+    var oneTime = 12000;
+    document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
+      oneTime += parseInt(cb.getAttribute('data-price'));
+    });
+    var type = document.querySelector('input[name="support-type"]:checked').value;
+    var monthly;
+    if (type === 'warranty') {
+      monthly = 1000;
+    } else {
+      var sel = document.getElementById('hours-select');
+      var opt = sel.options[sel.selectedIndex];
+      monthly = parseInt(opt.value) * parseInt(opt.getAttribute('data-rate'));
+    }
+    var grand = oneTime + monthly;
+    document.getElementById('grand-total').textContent = grand.toLocaleString('he-IL') + ' ₪';
+  }
+
+  function updateCalcTotal() {
+    var total = 12000;
+    document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
+      total += parseInt(cb.getAttribute('data-price'));
+    });
+    document.getElementById('calc-total').textContent = total.toLocaleString('he-IL') + ' ₪';
+    updateGrandTotal();
+  }
+
+  function selectCustomPackage() {
+    var total = 12000;
+    var items = ['חבילה בסיסית'];
+    document.querySelectorAll('.addon-cb:checked').forEach(function(cb) {
+      total += parseInt(cb.getAttribute('data-price'));
+      items.push(cb.getAttribute('data-name'));
+    });
+    var summary = items.join(' + ') + ' - ' + total.toLocaleString('he-IL') + ' ₪';
+    revealPricing();
+    var field = document.getElementById('selected-package');
+    if (field) { field.textContent = summary; field.style.fontWeight = '700'; field.style.color = '#1e3d78'; }
+    scrollTo(document.querySelector('.signature-section'));
+  }
+
+  document.querySelectorAll('input[name="support-type"]').forEach(function(r) {
+    r.addEventListener('change', updateSupportTotal);
+  });
+  document.getElementById('hours-select').addEventListener('change', updateHoursTotal);
+  updateGrandTotal();
+
+  document.querySelectorAll('.addon-cb').forEach(function(cb) {
+    cb.addEventListener('change', updateCalcTotal);
+  });
+
+  // ── Digital Signature Canvas ──
+  var sigCanvas = document.getElementById('sig-canvas');
+  var sigCtx = sigCanvas ? sigCanvas.getContext('2d') : null;
+  var isDrawing = false;
+  var sigStarted = false;
+
+  function setupCanvas() {
+    if (!sigCanvas) return;
+    var ratio = window.devicePixelRatio || 1;
+    var w = sigCanvas.offsetWidth || 320;
+    sigCanvas.width = w * ratio;
+    sigCanvas.height = 120 * ratio;
+    sigCanvas.style.height = '120px';
+    sigCtx.scale(ratio, ratio);
+    sigCtx.strokeStyle = '#1a2e5a';
+    sigCtx.lineWidth = 2.2;
+    sigCtx.lineCap = 'round';
+    sigCtx.lineJoin = 'round';
+  }
+
+  function getPos(e) {
+    var rect = sigCanvas.getBoundingClientRect();
+    if (e.touches) {
+      return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+    }
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+
+  function startDraw(e) {
+    e.preventDefault();
+    isDrawing = true;
+    var pos = getPos(e);
+    sigCtx.beginPath();
+    sigCtx.moveTo(pos.x, pos.y);
+    if (!sigStarted) {
+      sigStarted = true;
+      var d = new Date();
+      document.getElementById('sig-date').textContent = d.toLocaleDateString('he-IL');
+    }
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    var pos = getPos(e);
+    sigCtx.lineTo(pos.x, pos.y);
+    sigCtx.stroke();
+  }
+
+  function endDraw() { isDrawing = false; }
+
+  if (sigCanvas) {
+    setupCanvas();
+    window.addEventListener('resize', setupCanvas);
+    sigCanvas.addEventListener('mousedown', startDraw);
+    sigCanvas.addEventListener('mousemove', draw);
+    sigCanvas.addEventListener('mouseup', endDraw);
+    sigCanvas.addEventListener('mouseleave', endDraw);
+    sigCanvas.addEventListener('touchstart', startDraw, { passive: false });
+    sigCanvas.addEventListener('touchmove', draw, { passive: false });
+    sigCanvas.addEventListener('touchend', endDraw);
+  }
+
+  function clearSignature() {
+    if (!sigCtx) return;
+    var ratio = window.devicePixelRatio || 1;
+    sigCtx.clearRect(0, 0, sigCanvas.width / ratio, sigCanvas.height / ratio);
+    sigStarted = false;
+    document.getElementById('sig-date').textContent = '___________';
+    document.getElementById('sig-preview').style.display = 'none';
+    sigCanvas.style.display = 'block';
+    document.querySelector('.sig-canvas-controls').style.display = 'flex';
+    document.getElementById('pdf-save-wrap').style.display = 'none';
+  }
+
+  function confirmSignature() {
+    if (!sigStarted) { alert('אנא חתמו בתיבה לפני האישור'); return; }
+    var dataUrl = sigCanvas.toDataURL('image/png');
+    var preview = document.getElementById('sig-preview');
+    preview.src = dataUrl;
+    preview.style.display = 'block';
+    sigCanvas.style.display = 'none';
+    document.querySelector('.sig-canvas-controls').style.display = 'none';
+    document.getElementById('pdf-save-wrap').style.display = 'block';
+    scrollTo(document.getElementById('pdf-save-wrap'));
+  }
+</script>
+</body>
+</html>
