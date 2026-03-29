@@ -883,6 +883,7 @@ var DOC_PASSWORD = 'hakeren2026';        // ← שנו סיסמה כאן
 var TRACKING_WEBHOOK = 'https://hook.eu2.make.com/4mme7jnrjchbkoyirq88bivschwsua2e';
 var COMPANY = 'הקרן הישראלית לביטחון סוציאלי';  // ← שנו לפי שם הלקוח
 var _visitStart = null;
+var _pageLoadTime = Date.now(); // always track from page load
 
 function checkPassword() {
   var val = document.getElementById('pw-input').value.trim();
@@ -894,6 +895,7 @@ function checkPassword() {
     document.getElementById('pw-error').textContent = 'סיסמה שגויה — נסו שנית';
     document.getElementById('pw-input').value = '';
     document.getElementById('pw-input').focus();
+    trackEvent('wrong_password');
   }
 }
 
@@ -911,8 +913,9 @@ function trackEvent(type) {
     document: 'HAKEREN-3.26',
     company: COMPANY,
     timestamp: formatTimestamp(),
-    duration_seconds: _visitStart ? Math.round((Date.now() - _visitStart) / 1000) : 0,
-    duration_readable: _visitStart ? Math.floor((Date.now()-_visitStart)/60000) + ' דקות ' + Math.floor(((Date.now()-_visitStart)%60000)/1000) + ' שניות' : '0',
+    duration_seconds: Math.round((Date.now() - (_visitStart || _pageLoadTime)) / 1000),
+    duration_readable: (function() { var ms = Date.now() - (_visitStart || _pageLoadTime); return Math.floor(ms/60000) + ' דקות ' + Math.floor((ms%60000)/1000) + ' שניות'; })(),
+    password_entered: !!_visitStart,
     url: window.location.href
   };
   // sendBeacon must send Blob with application/json so Make.com parses correctly
@@ -931,12 +934,17 @@ function trackEvent(type) {
   }
 }
 
-// Send close event — fires on tab close, navigate away, refresh
+// Send close event — fires on tab close, navigate away, refresh — regardless of password
 function sendCloseEvent() {
-  if (_visitStart) trackEvent('close');
+  trackEvent('close');
 }
 window.addEventListener('beforeunload', sendCloseEvent);
 window.addEventListener('pagehide', sendCloseEvent); // mobile fallback
+
+// Send page_load event immediately when page opens
+window.addEventListener('DOMContentLoaded', function() {
+  trackEvent('page_load');
+});
 
 // Focus password input on load
 window.addEventListener('DOMContentLoaded', function() {
