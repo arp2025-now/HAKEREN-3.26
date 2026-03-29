@@ -729,13 +729,19 @@
   @media print {
     body { background: #fff; }
     .page { box-shadow: none; }
-    .toc, .cta-big-btn, .spec-cta, .section-divider, .exec-cta-row, .custom-pkg-calc, #sig-canvas, .sig-canvas-controls, .pdf-save-wrap { display: none !important; }
+    .toc, .cta-big-btn, .spec-cta, .section-divider, .exec-cta-row, #sig-canvas, .sig-canvas-controls, .pdf-save-wrap { display: none !important; }
     #pricing, .section-divider, #spec { display: block !important; }
     .spec-hidden, .pricing-hidden { display: block !important; }
     .sig-preview-img { display: block !important; }
     #spec, #pricing { background: #fff; }
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    /* Calculator: hide interactive controls, show as static list */
+    .custom-pkg-calc { display: block !important; }
+    .calc-confirm-btn { display: none !important; }
+    .addon-cb { display: inline !important; }
+    .calc-total-row { font-weight: 700; font-size: 15px; margin-top: 8px; }
+    .calc-items { pointer-events: none; }
   }
 
     /* Basic Package Card */
