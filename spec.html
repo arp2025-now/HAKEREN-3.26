@@ -844,19 +844,115 @@
 </head>
 <body>
 
-
+<!-- ═══════════════ PASSWORD GATE ═══════════════ -->
+<div id="pw-gate" style="
+  position:fixed; inset:0; z-index:9999;
+  background: linear-gradient(135deg,#1a2e5a 0%,#1e3d78 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Heebo',sans-serif; direction:rtl;
+">
+  <div style="
+    background:#fff; border-radius:20px; padding:40px 36px;
+    max-width:380px; width:90%; text-align:center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  ">
+    <div style="font-size:36px; margin-bottom:12px;">🔒</div>
+    <div style="font-size:22px; font-weight:800; color:#1a2e5a; margin-bottom:6px;">מסמך מוגן</div>
+    <div style="font-size:14px; color:#666; margin-bottom:24px;">הזינו את הסיסמה לצפייה בהצעה</div>
+    <input id="pw-input" type="password" placeholder="סיסמה" style="
+      width:100%; padding:12px 16px; border:2px solid #d0daf0;
+      border-radius:10px; font-size:16px; font-family:'Heebo',sans-serif;
+      text-align:center; box-sizing:border-box; margin-bottom:14px;
+      outline:none; transition:border-color 0.2s;
+    " onkeydown="if(event.key==='Enter') checkPassword()">
+    <div id="pw-error" style="color:#c0392b; font-size:13px; margin-bottom:10px; min-height:18px;"></div>
+    <button onclick="checkPassword()" style="
+      background:#1e3d78; color:#fff; border:none;
+      padding:13px 32px; border-radius:10px; font-size:16px;
+      font-family:'Heebo',sans-serif; font-weight:700;
+      cursor:pointer; width:100%;
+    ">כניסה</button>
+    <div style="margin-top:16px; font-size:12px; color:#aaa;">AP Automations — הצעת מחיר</div>
+  </div>
+</div>
 
 <script>
-// If already authenticated from main doc — skip password gate
+// ════════════════════════════════════════════════
+//  הגדרות — שנו כאן לפי הצורך
+// ════════════════════════════════════════════════
+var DOC_PASSWORD = 'hakeren2026';        // ← שנו סיסמה כאן
+var TRACKING_WEBHOOK = 'https://hook.eu2.make.com/4mme7jnrjchbkoyirq88bivschwsua2e';
+var COMPANY = 'הקרן הישראלית לביטחון סוציאלי';  // ← שנו לפי שם הלקוח
+var _visitStart = null;
+var _pageLoadTime = Date.now(); // always track from page load
+
+function checkPassword() {
+  var val = document.getElementById('pw-input').value.trim();
+  if (val === DOC_PASSWORD) {
+    document.getElementById('pw-gate').style.display = 'none';
+    _visitStart = Date.now();
+    sessionStorage.setItem('hakeren_auth', '1');
+    trackEvent('open');
+  } else {
+    document.getElementById('pw-error').textContent = 'סיסמה שגויה — נסו שנית';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+    trackEvent('wrong_password');
+  }
+}
+
+function formatTimestamp() {
+  var d = new Date();
+  var pad = function(n) { return n < 10 ? '0' + n : n; };
+  return pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear() +
+    ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+}
+
+function trackEvent(type) {
+  if (!TRACKING_WEBHOOK) return;
+  var ms = Date.now() - (_visitStart || _pageLoadTime);
+  var body = JSON.stringify({
+    event: type,
+    doc: 'HAKEREN-3.26',
+    company: COMPANY,
+    ts: formatTimestamp(),
+    duration: Math.floor(ms/60000) + 'm' + Math.floor((ms%60000)/1000) + 's',
+    pwd: _visitStart ? 'yes' : 'no'
+  });
+  // mode:'no-cors' bypasses CORS preflight — request always reaches Make.com
+  fetch(TRACKING_WEBHOOK, { method: 'POST', mode: 'no-cors', body: body })
+    .catch(function(){});
+  // close: also sendBeacon as backup (survives page unload)
+  if (type === 'close') {
+    try { navigator.sendBeacon(TRACKING_WEBHOOK, body); } catch(e) {}
+  }
+}
+
+// Send close event — fires on tab close, navigate away, refresh — regardless of password
+function sendCloseEvent() {
+  trackEvent('close');
+}
+window.addEventListener('beforeunload', sendCloseEvent);
+window.addEventListener('pagehide', sendCloseEvent); // mobile fallback
+
+// Send page_load event immediately when page opens
+window.addEventListener('DOMContentLoaded', function() {
+  trackEvent('page_load');
+});
+
+// Focus password input on load
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('pw-input').focus();
+});
+
+// Skip gate if already authenticated in this session
 (function() {
   if (sessionStorage.getItem('hakeren_auth') === '1') {
-    var gate = document.getElementById('pw-gate');
-    if (gate) gate.style.display = 'none';
+    document.getElementById('pw-gate').style.display = 'none';
     _visitStart = Date.now();
   }
 })();
 </script>
-
 
 
 <div class="content" style="max-width:860px; margin:0 auto; padding:24px 20px;">
@@ -870,7 +966,7 @@
     ">← חזרה לחבילות ומחירים</a>
   </div>
 
-  <div id="spec" class="spec-hidden">
+  <div id="spec">
     <div class="content">
 
       <!-- Section 1 -->
