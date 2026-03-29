@@ -1363,7 +1363,7 @@
             <input type="radio" name="support-type" value="warranty" checked>
             <div class="support-option-body">
               <div class="support-option-title">אחריות ותקינות</div>
-              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים</div>
+              <div class="support-option-desc">שמירה על תקינות המערכת, עדכונים וביצוע תיקונים. <strong>החיוב מתחיל מהחודש השני לאחר מסירת הפרויקט</strong> — החודש הראשון כלול במסגרת ההקמה. מענה ראשוני תוך 5 שעות מפתיחת קריאה. ביטול בהודעה מראש של 30 יום.</div>
               <div class="support-option-price">1,000 ₪ / חודש</div>
             </div>
           </label>
@@ -1371,8 +1371,8 @@
           <label class="support-option">
             <input type="radio" name="support-type" value="hours">
             <div class="support-option-body">
-              <div class="support-option-title">סל שעות חודשי</div>
-              <div class="support-option-desc">תמיכה + פיתוח משיפורים — שעות עבודה לפי בחירתכם</div>
+              <div class="support-option-title">סל שעות חודשי — כולל הכל ✦</div>
+              <div class="support-option-desc">כולל אחריות ותקינות <strong>בלי תוספת עלות</strong>, ועל גבי זה — שעות לפיתוח אוטומציות חדשות וייעול תהליכים. המערכת ממשיכה לגדול יחד איתכם. מענה ראשוני תוך 5 שעות. פירוט ביצוע בסוף כל חודש. שעות שלא נוצלו עוברות לחודש הבא. ביטול בהודעה מראש של 30 יום.</div>
               <div class="hours-selector">
                 <select id="hours-select" disabled>
                   <option value="10" data-rate="500">10 שעות — 500 ₪/שעה = 5,000 ₪/חודש</option>
@@ -1452,9 +1452,9 @@
           <div class="terms-box">
             <h4>💳 תנאי תשלום</h4>
             <ul>
-              <li>50% מקדמה בעת אישור ההצעה</li>
-              <li>50% עם השלמת הפרויקט ומסירתו</li>
-              <li>ריטיינר תחזוקה: <strong>1,000 ₪/חודש</strong></li>
+              <li><strong>הקמה חד פעמית:</strong> 50% מקדמה בעת אישור ההצעה + 50% עם מסירת הפרויקט</li>
+              <li><strong>תמיכה חודשית:</strong> תשלום בתחילת כל חודש</li>
+              <li>שעות שלא נוצלו בחודש מסוים — עוברות לחודש הבא</li>
               <li>העברה בנקאית: <strong>10-998-33145158</strong></li>
             </ul>
           </div>
@@ -1520,6 +1520,7 @@
       <div class="signature-section">
         <div class="sig-box">
           <div class="sig-label">חבילה נבחרת: <span id="selected-package">_______________________</span></div>
+          <div class="sig-label" style="font-size:14px; color:#1e3d78; font-weight:600;">סה"כ כולל (חד פעמי + חודש ראשון): <span id="sig-grand-total">—</span></div>
           <div class="sig-label">חתימת הלקוח - יוסי קרוהן / רון אובוז</div>
           <canvas id="sig-canvas"></canvas>
           <div class="sig-canvas-controls">
@@ -1654,7 +1655,10 @@
       monthly = parseInt(opt.value) * parseInt(opt.getAttribute('data-rate'));
     }
     var grand = oneTime + monthly;
-    document.getElementById('grand-total').textContent = grand.toLocaleString('he-IL') + ' ₪';
+    var grandStr = grand.toLocaleString('he-IL') + ' ₪';
+    document.getElementById('grand-total').textContent = grandStr;
+    var sigGrand = document.getElementById('sig-grand-total');
+    if (sigGrand) sigGrand.textContent = grandStr;
   }
 
   function updateCalcTotal() {
