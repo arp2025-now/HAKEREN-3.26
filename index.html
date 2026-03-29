@@ -1409,13 +1409,8 @@ window.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <div class="spec-cta" style="margin-top:32px;">
-    <a href="#pricing" class="cta-big-btn">← לבחירת חבילה ואישור ההצעה</a>
-  </div>
 
-</div>
-
-    <!-- ════ DIVIDER ════ -->
+  <!-- ════ DIVIDER ════ -->
   <div class="section-divider pricing-hidden">
     <div class="section-divider-inner">הצעת יישום ומחירים</div>
   </div>
@@ -1733,12 +1728,10 @@ window.addEventListener('DOMContentLoaded', function() {
       var target = document.querySelector(targetId);
 
       if (targetId === '#pricing') {
-        revealSpec();
         revealPricing();
         scrollTo(target);
       } else if (targetId === '#spec' || this.classList.contains('reveal-spec-btn')) {
         revealSpec();
-        revealPricing(); // also reveal so internal spec CTA can scroll to pricing
         scrollTo(target);
       } else if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
