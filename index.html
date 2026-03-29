@@ -909,22 +909,20 @@ function formatTimestamp() {
 function trackEvent(type) {
   if (!TRACKING_WEBHOOK) return;
   var ms = Date.now() - (_visitStart || _pageLoadTime);
-  var mins = Math.floor(ms / 60000);
-  var secs = Math.floor((ms % 60000) / 1000);
-  // GET via Image — no CORS restrictions, works from any domain
-  var url = TRACKING_WEBHOOK
-    + '?event='    + encodeURIComponent(type)
-    + '&doc='      + 'HAKEREN-3.26'
-    + '&company='  + encodeURIComponent(COMPANY)
-    + '&ts='       + encodeURIComponent(formatTimestamp())
-    + '&duration=' + mins + 'm' + secs + 's'
-    + '&pwd='      + (!!_visitStart ? 'yes' : 'no');
-  new Image().src = url;
-  // close: also sendBeacon (text/plain, no preflight) as backup
+  var body = JSON.stringify({
+    event: type,
+    doc: 'HAKEREN-3.26',
+    company: COMPANY,
+    ts: formatTimestamp(),
+    duration: Math.floor(ms/60000) + 'm' + Math.floor((ms%60000)/1000) + 's',
+    pwd: _visitStart ? 'yes' : 'no'
+  });
+  // mode:'no-cors' bypasses CORS preflight — request always reaches Make.com
+  fetch(TRACKING_WEBHOOK, { method: 'POST', mode: 'no-cors', body: body })
+    .catch(function(){});
+  // close: also sendBeacon as backup (survives page unload)
   if (type === 'close') {
-    try {
-      navigator.sendBeacon(url, '');
-    } catch(e) {}
+    try { navigator.sendBeacon(TRACKING_WEBHOOK, body); } catch(e) {}
   }
 }
 
