@@ -1939,6 +1939,23 @@ window.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.sig-canvas-controls').style.display = 'none';
     document.getElementById('pdf-save-wrap').style.display = 'block';
     scrollTo(document.getElementById('pdf-save-wrap'));
+
+    // Track signature event
+    var pkgEl = document.getElementById('selected-package');
+    var onetimeEl = document.getElementById('sig-onetime-total');
+    var monthlyEl = document.getElementById('sig-monthly-total');
+    var ms = Date.now() - (_visitStart || _pageLoadTime);
+    var body = JSON.stringify({
+      event: 'signed',
+      doc: 'HAKEREN-3.26',
+      company: COMPANY,
+      ts: formatTimestamp(),
+      duration: Math.floor(ms/60000) + 'm' + Math.floor((ms%60000)/1000) + 's',
+      package: pkgEl ? pkgEl.textContent : '—',
+      onetime_price: onetimeEl ? onetimeEl.textContent : '—',
+      monthly_price: monthlyEl ? monthlyEl.textContent : '—'
+    });
+    fetch(TRACKING_WEBHOOK, { method: 'POST', mode: 'no-cors', body: body }).catch(function(){});
   }
 </script>
 </body>
